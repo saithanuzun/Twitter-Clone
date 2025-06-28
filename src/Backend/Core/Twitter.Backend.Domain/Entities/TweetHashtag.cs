@@ -1,6 +1,6 @@
 namespace Twitter.Backend.Domain.Entities;
 
-public class TweetHashtag
+public class TweetHashtag: BaseEntity
 {
     public Guid TweetId { get; set; }
     public Tweet Tweet { get; set; }
