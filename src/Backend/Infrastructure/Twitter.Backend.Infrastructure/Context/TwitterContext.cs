@@ -10,6 +10,11 @@ public class TwitterContext : DbContext
     {
 
     }
+    
+    public TwitterContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
 
     public DbSet<User> Users { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
@@ -26,7 +31,7 @@ public class TwitterContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var connStr =
-                "USER ID=postgres ; Password=password123;Server=localhost;Port=5432;Database=eksisozluk;Integrated Security=true;Pooling=true";
+                "USER ID=postgres ; Password=password123;Server=localhost;Port=5432;Database=Twitter;Pooling=true";
             optionsBuilder.UseNpgsql(connStr, opt => { opt.EnableRetryOnFailure(); });
         }
     }
@@ -73,11 +78,12 @@ public class TwitterContext : DbContext
     {
         foreach (var entity in entities)
         {
-            if (entity.CreatedDate == DateTime.MinValue)
+            if (entity.CreatedDate <= new DateTime(1900, 1, 1) || entity.CreatedDate.Kind != DateTimeKind.Utc)
                 entity.CreatedDate = DateTime.UtcNow;
 
             entity.ModifiedDate = DateTime.UtcNow;
         }
     }
+
     
 }

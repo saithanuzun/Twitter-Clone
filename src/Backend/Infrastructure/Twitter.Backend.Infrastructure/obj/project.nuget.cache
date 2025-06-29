@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "ohMnk9PUWQo=",
+  "dgSpecHash": "3FqYbmybt7A=",
   "success": true,
   "projectFilePath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Infrastructure/Twitter.Backend.Infrastructure/Twitter.Backend.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "/Users/saithanuzun/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/bogus/35.6.3/bogus.35.6.3.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/fluentvalidation/12.0.0/fluentvalidation.12.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.0.0/fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/mediatr/8.0.0/mediatr.8.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/8.0.0/mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.3/microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.codeanalysis.common/4.5.0/microsoft.codeanalysis.common.4.5.0.nupkg.sha512",
@@ -47,5 +53,16 @@
     "/Users/saithanuzun/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 14.0.0 was resolved.",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

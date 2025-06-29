@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Twitter.Backend.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65c8c1194f98de34685772da00a616e808abc1f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56a7163f241a7a6825df66725d0773aa44ac87f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Twitter.Backend.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Twitter.Backend.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -18,8 +18,8 @@ public static class Registration
             conf.UseNpgsql(connStr, opt => { opt.EnableRetryOnFailure(); });
         });
 
-        var seedData = new DataSeed();
-        seedData.SeedAsync(configuration).GetAwaiter().GetResult();
+        //var seedData = new DataSeed();
+        //seedData.SeedAsync(configuration).GetAwaiter().GetResult();
 
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
         serviceCollection.AddScoped<ITweetRepository, TweetRepository>();
