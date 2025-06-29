@@ -9,5 +9,17 @@ public class TweetEntityConfiguration : BaseEntityConfiguration<Tweet>
     {
         base.Configure(builder);
         
+        builder.HasOne(i => i.ParentTweet)
+            .WithMany(i => i.Replies)
+            .HasForeignKey(i => i.ParentTweetId);
+
+        builder.HasOne(i => i.RetweetParent)
+            .WithMany(i => i.Retweets)
+            .HasForeignKey(i => i.RetweetParentId);
+
+        builder.HasOne(i => i.User)
+            .WithMany(i => i.Tweets)
+            .HasForeignKey(i => i.UserId);
+
     }
 }

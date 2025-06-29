@@ -20,6 +20,7 @@ public class Tweet : BaseEntity
     public User User { get; set; }
 
     public bool IsRetweet { get; set; }
+    
     // Retweets
     public Guid? RetweetParentId { get; set; }
     public Tweet? RetweetParent { get; set; }
@@ -27,7 +28,7 @@ public class Tweet : BaseEntity
     public ICollection<Tweet> Retweets { get; set; } 
     
 
-    public ICollection<TweetLike>? LikedByUsers { get; set; }
+    public ICollection<TweetLike>? TweetLikes { get; set; }
 
     public ICollection<TweetHashtag> TweetHashtags { get; set; }
 }

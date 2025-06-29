@@ -10,5 +10,12 @@ public class UserEntityConfiguration: BaseEntityConfiguration<User>
     {
         base.Configure(builder);
         builder.ToTable("user");
+
+        builder.HasOne(i => i.Profile)
+            .WithOne(i => i.User)
+            .HasForeignKey<UserProfile>(i => i.UserId);
+
+        
+        
     }
 }

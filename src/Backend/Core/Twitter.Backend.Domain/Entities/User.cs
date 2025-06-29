@@ -13,7 +13,7 @@ public class User : BaseEntity
     //one to many tweets
     public virtual ICollection<Tweet> Tweets { get; set; }
     
-    // Followers and Following ef lazy loading 
+    // Self-reference 
     public virtual ICollection<UserFollow> Followers { get; set; } 
     public virtual ICollection<UserFollow> Following { get; set; } 
     
