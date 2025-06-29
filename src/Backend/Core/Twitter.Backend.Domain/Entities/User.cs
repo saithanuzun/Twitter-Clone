@@ -7,7 +7,7 @@ public class User : BaseEntity
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     
-    //one to one
+    //one to one 
     public UserProfile Profile { get; set; }
     
     //one to many tweets

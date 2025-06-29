@@ -1073,7 +1073,8 @@
           "FluentValidation": "12.0.0",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
           "MediatR": "8.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0"
+          "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0",
+          "Twitter.Backend.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Twitter.Backend.Application.dll": {}

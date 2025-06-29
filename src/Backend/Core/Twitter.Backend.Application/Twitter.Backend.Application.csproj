@@ -17,9 +17,11 @@
 
     <ItemGroup>
       <Folder Include="Features\Commands\Hashtag" />
-      <Folder Include="Features\Commands\User" />
       <Folder Include="Features\Queries" />
-      <Folder Include="Mapping" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Twitter.Backend.Domain\Twitter.Backend.Domain.csproj" />
     </ItemGroup>
 
 </Project>

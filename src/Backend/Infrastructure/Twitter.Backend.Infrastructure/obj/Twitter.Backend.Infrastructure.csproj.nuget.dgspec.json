@@ -26,7 +26,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Core/Twitter.Backend.Domain/Twitter.Backend.Domain.csproj": {
+                "projectPath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Core/Twitter.Backend.Domain/Twitter.Backend.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
