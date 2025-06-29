@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Commands\Hashtag" />
       <Folder Include="Features\Queries" />
     </ItemGroup>
 
