@@ -6,7 +6,7 @@ namespace Twitter.Backend.Application.Features.Commands.User.DeleteFollow;
 
 public class DeleteFollowHandler : IRequestHandler<DeleteFollowRequest,DeleteFollowResponse>
 {
-    private IUserFollowRepository _userFollowRepository;
+    private readonly IUserFollowRepository _userFollowRepository;
     private IMapper _mapper;
 
     public DeleteFollowHandler(IUserFollowRepository userFollowRepository, IMapper mapper)

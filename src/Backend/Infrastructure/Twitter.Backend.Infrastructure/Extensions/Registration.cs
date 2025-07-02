@@ -24,6 +24,9 @@ public static class Registration
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
         serviceCollection.AddScoped<ITweetRepository, TweetRepository>();
         serviceCollection.AddScoped<IHashtagRepository, HashtagRepository>();
+        serviceCollection.AddScoped<ITweetHashTagRepository, TweetHashtagRepository>();
+        serviceCollection.AddScoped<ITweetLikeRepository, TweetLikeRepository>();
+        serviceCollection.AddScoped<IUserFollowRepository, UserFollowRepository>();
         
         return serviceCollection;
     }
