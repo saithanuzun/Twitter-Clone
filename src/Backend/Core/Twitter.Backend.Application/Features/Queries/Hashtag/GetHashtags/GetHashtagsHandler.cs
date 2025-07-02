@@ -15,8 +15,10 @@ public class GetHashtagsHandler : IRequestHandler<GetHashtagsRequest,GetHashTags
         _mapper = mapper;
     }
 
-    public Task<GetHashTagsResponse> Handle(GetHashtagsRequest request, CancellationToken cancellationToken)
+    public async Task<GetHashTagsResponse> Handle(GetHashtagsRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var hashtags =  _hashtagRepository.GetAll().Result.Select(i=>i.Tag).ToList();
+
+        return new GetHashTagsResponse() {Hashtags = hashtags};
     }
 }

@@ -16,13 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Queries\Tweet\GetMainPageTweets" />
-      <Folder Include="Features\Queries\User\GetUserFollowers" />
-      <Folder Include="Features\Queries\User\GetUserFollowings" />
-      <Folder Include="Pagination" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Twitter.Backend.Domain\Twitter.Backend.Domain.csproj" />
     </ItemGroup>
 

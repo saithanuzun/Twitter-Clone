@@ -5,20 +5,22 @@ using Twitter.Backend.Domain.Repositories;
 
 namespace Twitter.Backend.Application.Features.Queries.Hashtag.GetHashtagTweets;
 
-public class GetHashtagTweetHandler : IRequestHandler<GetHashtagsRequest,GetHashTagsResponse>
+public class GetHashtagTweetHandler : IRequestHandler<GetHashtagTweetRequest,GetHashtagTweetResponse>
 {
-    private IHashtagRepository _hashtagRepository;
+    private ITweetHashTagRepository _tweetHashTagRepository;
     private IMapper _mapper;
     
 
-    public GetHashtagTweetHandler(IHashtagRepository hashtagRepository, IMapper mapper)
+    public GetHashtagTweetHandler( IMapper mapper, ITweetHashTagRepository tweetHashTagRepository)
     {
-        _hashtagRepository = hashtagRepository;
         _mapper = mapper;
+        _tweetHashTagRepository = tweetHashTagRepository;
     }
 
-    public Task<GetHashTagsResponse> Handle(GetHashtagsRequest request, CancellationToken cancellationToken)
+    public async Task<GetHashtagTweetResponse> Handle(GetHashtagTweetRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var tweets = _tweetHashTagRepository.Get(i => i.HashtagId == request.HashtagId).Select(i=>i.TweetId).ToList();
+
+        return new GetHashtagTweetResponse() { HashtagId = request.HashtagId, HashtagTweetsIds = tweets };
     }
 }
