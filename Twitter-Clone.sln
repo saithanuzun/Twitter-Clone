@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Backend.WebApi", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Frontend.BlazorApp", "src\Frontend\Twitter.Frontend.BlazorApp\Twitter.Frontend.BlazorApp.csproj", "{7E780CF0-AC44-4236-8F5B-9E0780D71D9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DAD7D9B9-B6FD-4967-8E5F-D2F89A92D472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +38,7 @@ Global
 		{C1E22965-1483-42A2-8FA2-972F5BE9C311} = {6E7FD597-F03D-4423-8723-1A847DE6A517}
 		{F818D016-3746-4FDC-97F7-394AE90D3D35} = {03DD0DF9-B828-4408-B3C6-BA5C03CCC2C4}
 		{7E780CF0-AC44-4236-8F5B-9E0780D71D9D} = {B57BDD06-38B5-4DDA-BC61-9095CB48B75D}
+		{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB} = {DAD7D9B9-B6FD-4967-8E5F-D2F89A92D472}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{52B6D2FC-AF13-4134-9998-67B1387934C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -56,5 +61,9 @@ Global
 		{7E780CF0-AC44-4236-8F5B-9E0780D71D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E780CF0-AC44-4236-8F5B-9E0780D71D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E780CF0-AC44-4236-8F5B-9E0780D71D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77D5C4F-3AD3-47B5-A6C0-45610D9C42AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

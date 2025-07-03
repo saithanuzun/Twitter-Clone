@@ -6,7 +6,7 @@ using Twitter.Backend.Domain.Repositories;
 namespace Twitter.Backend.Application.Features.Queries.Tweet.GetMainPageTweets;
 
 public class
-    GetMainPageTweetsHandler : IRequestHandler<PaginationResponse<GetMainPageTweetsRequest>, GetMainPageTweetsResponse>
+    GetMainPageTweetsHandler : IRequestHandler<GetMainPageTweetsRequest, PaginationResponse<GetMainPageTweetsResponse>>
 {
     private ITweetRepository _tweetRepository;
 
@@ -14,12 +14,14 @@ public class
     {
         _tweetRepository = tweetRepository;
     }
+    
 
-    public Task<GetMainPageTweetsResponse> Handle(PaginationResponse<GetMainPageTweetsRequest> request, CancellationToken cancellationToken)
+    public async Task<PaginationResponse<GetMainPageTweetsResponse>> Handle(GetMainPageTweetsRequest request, CancellationToken cancellationToken)
     {
-        var TweetsQuery = _tweetRepository.AsQueryable();
+        var TweetsQuery = _tweetRepository.AsQueryable().GetPaged(request.PageSize,request.Page).Result;
 
-        TweetsQuery = TweetsQuery.GetPaged(request.PageInfo.PageSize, request.PageInfo.CurrentPage);
+        return new PaginationResponse<GetMainPageTweetsResponse>(TweetsQuery.ToList(),new PageInfo(request.PageSize,request.Page) );
+
     }
 }
 
