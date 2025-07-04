@@ -4,5 +4,6 @@ namespace Twitter.Backend.Application.Features.Queries.Hashtag.GetHashtagTweets;
 
 public class GetHashtagTweetRequest : IRequest<GetHashtagTweetResponse>
 {
-    public Guid HashtagId { get; set; }
+    public Guid? HashtagId { get; set; }
+    public string? Tag { get; set; }
 }

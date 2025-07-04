@@ -20,8 +20,8 @@ public class
     {
         var TweetsQuery = _tweetRepository.AsQueryable().GetPaged(request.PageSize,request.Page).Result;
 
-        return new PaginationResponse<GetMainPageTweetsResponse>(TweetsQuery.ToList(),new PageInfo(request.PageSize,request.Page) );
-
+        //return new PaginationResponse<GetMainPageTweetsResponse>(TweetsQuery.ToList(),new PageInfo(request.PageSize,request.Page) );
+        return null;
     }
 }
 

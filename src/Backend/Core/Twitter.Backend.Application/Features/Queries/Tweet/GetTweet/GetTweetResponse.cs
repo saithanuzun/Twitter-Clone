@@ -2,6 +2,7 @@ namespace Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
 
 public class GetTweetResponse 
 {
+    public DateTime CreatedDate { get; set; }
     public Guid Id { get; set; }
     public string Content { get; set; }
     

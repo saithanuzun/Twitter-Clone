@@ -1,4 +1,6 @@
+using Twitter.Backend.Application.Extensions;
 using Twitter.Backend.Infrastructure.Extensions;
+using Twitter.Backend.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddInfrastructureRegistration(builder.Configuration);
+builder.Services.AddApplicationRegistration();
+builder.Services.AddWebApiRegistrations();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();  
 
 var app = builder.Build();
 
@@ -20,5 +26,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
 app.Run();
+
 

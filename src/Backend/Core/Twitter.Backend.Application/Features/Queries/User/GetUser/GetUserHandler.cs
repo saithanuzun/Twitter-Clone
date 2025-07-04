@@ -14,10 +14,14 @@ public class GetUserHandler : IRequestHandler<GetUserRequest,GetUserResponse>
         _userRepository = userRepository;
         _mapper = mapper;
     }
+    
 
     public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetSingleAsync(i => i.Id == request.Id);
+        if (request.Username is null && request.Id is null)
+            return new GetUserResponse();
+        
+        var user = await _userRepository.GetSingleAsync(i => i.Id == request.Id || i.Username == request.Username,default,k=>k.Profile );
 
         return _mapper.Map<GetUserResponse>(user);
     }

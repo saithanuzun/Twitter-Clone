@@ -4,5 +4,6 @@ namespace Twitter.Backend.Application.Features.Queries.User.GetUser;
 
 public class GetUserRequest : IRequest<GetUserResponse>
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
+    public string? Username { get; set; }
 }
