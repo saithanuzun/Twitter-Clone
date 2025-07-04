@@ -15,10 +15,16 @@ public class GetUserTweetHandler : IRequestHandler<GetUserTweetsRequest,GetUserT
         _mapper = mapper;
     }
 
+    // TODO: Implement user tweet paged functionality.
+
     public async Task<GetUserTweetsResponse> Handle(GetUserTweetsRequest request, CancellationToken cancellationToken)
     {
-        var tweets =  _tweetRepository.Get(i => i.UserId == request.UserId).ToList();
+        var tweets =  _tweetRepository
+            .Get(i => i.UserId == request.UserId || request.username==i.User.Username,default,i=>i.User)
+            .Select(i=>i.Id)
+            .ToList();
+        
 
-        return new GetUserTweetsResponse() { UserId = request.UserId, Tweets = tweets };
+        return new GetUserTweetsResponse() { UserId = request.UserId, Username=request.username, TweetIds = tweets };
     }
 }

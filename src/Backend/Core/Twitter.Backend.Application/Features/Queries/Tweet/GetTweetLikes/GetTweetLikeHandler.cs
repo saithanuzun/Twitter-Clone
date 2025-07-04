@@ -17,7 +17,10 @@ public class GetTweetLikeHandler : IRequestHandler<GetTweetLikesRequest,GetTweet
 
     public async Task<GetTweetLikesResponse> Handle(GetTweetLikesRequest request, CancellationToken cancellationToken)
     {
-        var LikedByUsers = _tweetLikeRepository.Get(i => i.TweetId == request.TweetId).Select(i => i.UserId).ToList();
+        var LikedByUsers = _tweetLikeRepository
+            .Get(i => i.TweetId == request.TweetId)
+            .Select(i => i.UserId)
+            .ToList();
 
         return new GetTweetLikesResponse() {TweetId = request.TweetId,UserIds =LikedByUsers, LikesCount = LikedByUsers.Count};
     }
