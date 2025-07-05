@@ -15,7 +15,9 @@ public class GetUserFollowingsHandler : IRequestHandler<GetUserFollowingsRequest
 
     public async Task<GetUserFollowingsResponse> Handle(GetUserFollowingsRequest request, CancellationToken cancellationToken)
     {
-        var Followings = _followRepository.Get(i => i.FollowerId == request.FollowerUserId).Select(i => i.FollowingId)
+        var Followings = _followRepository
+            .Get(i => i.FollowerId == request.FollowerUserId)
+            .Select(i => i.FollowingId)
             .ToList();
 
         return new GetUserFollowingsResponse() { UserFollowingIds = Followings };

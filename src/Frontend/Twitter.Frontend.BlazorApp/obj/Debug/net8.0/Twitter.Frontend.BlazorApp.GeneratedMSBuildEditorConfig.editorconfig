@@ -26,16 +26,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Layout/RightSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L1JpZ2h0U2lkZWJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Layout/TweetFeed.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L1R3ZWV0RmVlZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Layout/UserSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L1VzZXJTaWRlYmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/_Imports.razor]
@@ -45,7 +49,3 @@ build_metadata.AdditionalFiles.CssScope =
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-tqh4fpu8c9
-
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Layout/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-2uai0qkclf

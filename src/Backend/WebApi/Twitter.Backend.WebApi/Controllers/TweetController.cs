@@ -40,27 +40,37 @@ public class TweetController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("{id}/Likes")]
+    [HttpGet("{TweetId:guid}/likes")]
     public async Task<IActionResult> LikedByUsers(Guid TweetId)
     {
         var response = await _mediator.Send(new GetTweetLikesRequest(){TweetId = TweetId});
         return Ok(response);
     }
     
-    [HttpGet("{id}/Replies")]
+    [HttpGet("{TweetId:guid}/replies")]
     public async Task<IActionResult> GetReplies(Guid TweetId)
     {
         var response = await _mediator.Send(new GetRepliesRequest() { TweetId = TweetId });
         return Ok(response);
     }
     
-    [HttpGet("MainPage")] // TODO: Implement Main page tweets.
-
-    public async Task<IActionResult> GetMainPageTweets([FromQuery] Guid userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    [HttpGet("by-user/feed")] // TODO: Implement Main page tweets.
+    public async Task<IActionResult> FeedByUser([FromQuery] Guid userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var response = await _mediator.Send(new GetMainPageTweetsRequest()
         {
             UserId = userId,
+            Page = page,
+            PageSize = pageSize
+        });
+
+        return Ok(response);
+    }
+    [HttpGet("feed")] // TODO: Implement Main page tweets.
+    public async Task<IActionResult> Feed( [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    {
+        var response = await _mediator.Send(new GetMainPageTweetsRequest()
+        {
             Page = page,
             PageSize = pageSize
         });

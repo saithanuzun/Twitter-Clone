@@ -26,7 +26,7 @@ public class HashtagController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("GetAll")]
+    [HttpGet("Get-all")]
     public async Task<IActionResult> GetHashtags()
     {
         var response = await _mediator.Send(new GetHashtagsRequest());

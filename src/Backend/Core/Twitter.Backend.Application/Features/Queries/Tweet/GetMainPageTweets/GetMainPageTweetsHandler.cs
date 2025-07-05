@@ -19,11 +19,24 @@ public class
 
     public async Task<PaginationResponse<GetMainPageTweetsResponse>> Handle(GetMainPageTweetsRequest request, CancellationToken cancellationToken)
     {
-        var TweetsQuery = _tweetRepository.AsQueryable().GetPaged(request.PageSize,request.Page).Result;
+        var query = _tweetRepository.AsQueryable();
 
-        //return new PaginationResponse<GetMainPageTweetsResponse>(TweetsQuery.ToList(),new PageInfo(request.PageSize,request.Page) );
-        return null;
+        var list = query.Select(i => new GetMainPageTweetsResponse
+        {
+            Id = i.Id,
+            Content = i.Content,
+            CreatedDate = i.CreatedDate,
+            IsDeleted = i.IsDeleted,
+            DeletedDate = i.DeletedDate,
+            ParentTweetId = i.ParentTweetId,
+            UserId = i.UserId,
+            IsRetweet = i.IsRetweet,
+            RetweetParentId = i.RetweetParentId
+        });
+
+        return  list.GetPaged(request.PageSize, request.Page);
     }
+
 }
 
 

@@ -33,14 +33,14 @@ public class UserController : BaseController
     
     [HttpPost] // TODO: Implement the auth func JWT.
 
-    [Route("Login")] // TODO: Implement the login functionality.
+    [Route("login")] // TODO: Implement the login functionality.
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var result = await _mediator.Send(request);
 
         return Ok(result);
     }
-
+    
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -55,19 +55,19 @@ public class UserController : BaseController
         return Ok(response);
     }
 
-    [HttpGet("{UserId:guid}/Followers")]
+    // TODO: change it to get it by username instead of id
+    [HttpGet("{UserId:guid}/followers")]
     public async Task<IActionResult> GetUserFollowers(Guid UserId)
     {
-        var response = await _mediator.Send(new GetUserFollowersRequest { UserId = UserId});
+        var response = await _mediator.Send(new GetUserFollowersRequest { FollowingId = UserId});
         return Ok(response);
     }
     
-    [HttpGet("{UserId:guid}/Following")]
+    [HttpGet("{UserId:guid}/following")]
     public async Task<IActionResult> GetUserFollowing(Guid UserId)
     {
         var response = await _mediator.Send(new GetUserFollowingsRequest() { FollowerUserId = UserId});
         return Ok(response);
     }
     
-   
 }

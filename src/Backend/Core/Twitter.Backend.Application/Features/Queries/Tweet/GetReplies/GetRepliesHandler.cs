@@ -17,8 +17,12 @@ public class GetRepliesHandler : IRequestHandler<GetRepliesRequest,GetRepliesRes
 
     public async Task<GetRepliesResponse> Handle(GetRepliesRequest request, CancellationToken cancellationToken)
     {
-        var replies = _tweetRepository.Get(i => i.ParentTweetId == request.TweetId).ToList();
+        var replies =  _tweetRepository
+            .Get(tweet => tweet.ParentTweetId == request.TweetId);
 
-        return new GetRepliesResponse() { Replies = replies };
+        return new GetRepliesResponse
+        {
+            Replies = replies.ToList()
+        };
     }
 }

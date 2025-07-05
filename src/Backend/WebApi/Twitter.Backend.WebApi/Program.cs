@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Twitter.Backend.Application.Extensions;
 using Twitter.Backend.Infrastructure.Extensions;
 using Twitter.Backend.WebApi.Extensions;
+using Twitter.Backend.WebApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,10 @@ builder.Services.AddWebApiRegistrations();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers();  
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+});
 
 var app = builder.Build();
 

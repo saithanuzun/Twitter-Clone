@@ -1,16 +1,24 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left: Profile & Menu -->
+        <div class="col-md-3 bg-light">
+            <UserSidebar />
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        <!-- Center: Tweets Feed -->
+        <div class="col-md-6">
+            <TweetFeed />
+        </div>
+
+        <!-- Right: Suggestions -->
+        <div class="col-md-3 bg-light">
+            <RightSidebar />
+        </div>
+    </div>
 </div>
+
+@code {
+    // Could inject state or theme handling here
+}

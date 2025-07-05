@@ -1,0 +1,39 @@
+<div class="mb-3 d-flex">
+    <button class="btn btn-primary me-2">Following</button>
+    <button class="btn btn-outline-secondary">All Tweets</button>
+</div>
+
+@for (int i = 0; i < 5; i++)
+{
+    <div class="d-flex mb-4 border-bottom pb-3">
+        <!-- Profile Image -->
+        <img src="https://via.placeholder.com/48" class="rounded-circle me-3" alt="Profile" width="48" height="48" />
+
+        <!-- Tweet Content -->
+        <div class="flex-grow-1">
+            <!-- User Info -->
+            <div class="d-flex justify-content-between">
+                <div>
+                    <span class="fw-bold">User{i + 1}</span>
+                    <span class="text-muted">{i + 1} · Just now</span>
+                </div>
+                <div>
+                    <i class="bi bi-three-dots"></i> <!-- Optional menu icon -->
+                </div>
+            </div>
+
+            <!-- Tweet Text -->
+            <div class="mt-1">
+                <p class="mb-2">This is a sample tweet content by user {i + 1}. It's styled to mimic Twitter/X UI.</p>
+            </div>
+
+            <!-- Actions (icons are just placeholders) -->
+            <div class="d-flex justify-content-between text-muted" style="max-width: 425px;">
+                <div><i class="bi bi-chat"></i> 12</div>
+                <div><i class="bi bi-arrow-repeat"></i> 8</div>
+                <div><i class="bi bi-heart"></i> 42</div>
+                <div><i class="bi bi-upload"></i></div>
+            </div>
+        </div>
+    </div>
+}

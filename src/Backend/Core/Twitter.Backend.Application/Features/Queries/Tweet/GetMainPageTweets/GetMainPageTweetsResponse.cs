@@ -1,7 +1,10 @@
+using Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
+
 namespace Twitter.Backend.Application.Features.Queries.Tweet.GetMainPageTweets;
 
 public class GetMainPageTweetsResponse
 {
+    public DateTime CreatedDate { get; set; }
     public Guid Id { get; set; }
     public string Content { get; set; }
     
@@ -14,4 +17,5 @@ public class GetMainPageTweetsResponse
     public bool IsRetweet { get; set; }
     
     public Guid? RetweetParentId { get; set; }
+    
 }
