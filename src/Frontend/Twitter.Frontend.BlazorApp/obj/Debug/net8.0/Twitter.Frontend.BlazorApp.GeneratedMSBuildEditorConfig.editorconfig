@@ -38,8 +38,52 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L1VzZXJTaWRlYmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Components/CreateTweetComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcG9uZW50cy9DcmVhdGVUd2VldENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home/FollowingFeed.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9Gb2xsb3dpbmdGZWVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9TZXR0aW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Login/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4vTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Login/Sign-Up.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4vU2lnbi1VcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UpdateUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9VcGRhdGVVc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/User.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserFollowers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyRm9sbG93ZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserFollowing.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyRm9sbG93aW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserLikes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyTGlrZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserReplies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyUmVwbGllcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/_Imports.razor]

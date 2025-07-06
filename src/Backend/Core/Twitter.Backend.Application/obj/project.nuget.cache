@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v1bcN2YkF+8=",
+  "dgSpecHash": "ui7c+c8oy+k=",
   "success": true,
   "projectFilePath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Core/Twitter.Backend.Application/Twitter.Backend.Application.csproj",
   "expectedPackageFiles": [
@@ -10,10 +10,19 @@
     "/Users/saithanuzun/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.0.0/fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/mediatr/8.0.0/mediatr.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/8.0.0/mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
-    "/Users/saithanuzun/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.abstractions/8.12.1/microsoft.identitymodel.abstractions.8.12.1.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.12.1/microsoft.identitymodel.jsonwebtokens.8.12.1.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.logging/8.12.1/microsoft.identitymodel.logging.8.12.1.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.protocols/7.0.3/microsoft.identitymodel.protocols.7.0.3.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/7.0.3/microsoft.identitymodel.protocols.openidconnect.7.0.3.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.tokens/8.12.1/microsoft.identitymodel.tokens.8.12.1.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/system.identitymodel.tokens.jwt/8.12.1/system.identitymodel.tokens.jwt.8.12.1.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

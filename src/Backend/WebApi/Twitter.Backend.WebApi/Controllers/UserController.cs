@@ -1,4 +1,6 @@
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Twitter.Backend.Application.Features.Commands.User.Create;
@@ -7,6 +9,7 @@ using Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
 using Twitter.Backend.Application.Features.Queries.User.GetUser;
 using Twitter.Backend.Application.Features.Queries.User.GetUserFollowers;
 using Twitter.Backend.Application.Features.Queries.User.GetUserFollowings;
+using LoginRequest = Twitter.Backend.Application.Features.Commands.User.Login.LoginRequest;
 
 namespace Twitter.Backend.WebApi.Controllers;
 
@@ -24,6 +27,7 @@ public class UserController : BaseController
     }
     
     [HttpPut]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
     {
         var response = await _mediator.Send(request);
@@ -31,9 +35,8 @@ public class UserController : BaseController
     }
     
     
-    [HttpPost] // TODO: Implement the auth func JWT.
-
-    [Route("login")] // TODO: Implement the login functionality.
+    [HttpPost]
+    [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var result = await _mediator.Send(request);

@@ -25,12 +25,14 @@ public class TweetService : ITweetService
 
     public Task<PagedViewModel<TweetDvo>> GetProfilePageEntries(int page, int pageSize, string userName = null)
     {
-        
+        throw new NotImplementedException();
+
     }
 
     public Task<PagedViewModel<TweetDvo>> GetEntryComments(Guid entryId, int page, int pageSize)
     {
-        
+        throw new NotImplementedException();
+
     }
 
     public Task<Guid> CreateEntry(CreateTweetDto command)

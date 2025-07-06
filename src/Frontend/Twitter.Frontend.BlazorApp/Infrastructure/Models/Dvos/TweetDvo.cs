@@ -2,5 +2,18 @@ namespace Twitter.Frontend.BlazorApp.Infrastructure.Models.Dvos;
 
 public class TweetDvo
 {
-        
+    public DateTime CreatedDate { get; set; }
+    public Guid Id { get; set; }
+    public string Content { get; set; }
+    
+    public bool IsDeleted { get; set; }
+    public DateTime DeletedDate { get; set; }
+    
+    public Guid? ParentTweetId { get; set; }
+
+    public Guid UserId { get; set; }
+    public bool IsRetweet { get; set; }
+    
+    public Guid? RetweetParentId { get; set; }
+
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,5 +15,25 @@ public abstract class BaseController : ControllerBase
     public BaseController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    
+    public Guid? UserId
+    {
+        get
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity is not null)
+            {
+                var userClaims = identity.Claims;
+                var id = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                if (!string.IsNullOrEmpty(id))
+                    return new Guid(id);
+            }
+
+            return null;
+        }
     }
 }

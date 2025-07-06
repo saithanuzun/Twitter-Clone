@@ -18,7 +18,7 @@ public class DeleteFollowHandler : IRequestHandler<DeleteFollowRequest,DeleteFol
     public async Task<DeleteFollowResponse> Handle(DeleteFollowRequest request, CancellationToken cancellationToken)
     {
         var dbFollow = await _userFollowRepository
-            .GetSingleAsync(i => i.Id == request.Id);
+            .GetSingleAsync(i => i.FollowerId == request.FollowerId && i.FollowingId == request.FollowingId);
         
         await _userFollowRepository.DeleteAsync(dbFollow);
 

@@ -20,7 +20,7 @@ public class DeleteLikeHandler : IRequestHandler<DeleteLikeRequest,DeleteLikeRes
     public async Task<DeleteLikeResponse> Handle(DeleteLikeRequest request, CancellationToken cancellationToken)
     {
         var dbLike = await _tweetLikeRepository
-            .GetSingleAsync(i => i.Id == request.Id);
+            .GetSingleAsync(i => i.UserId == request.UserId && i.TweetId == request.TweetId);
         
         await _tweetLikeRepository.DeleteAsync(dbLike);
 

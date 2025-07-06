@@ -1,4 +1,6 @@
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Twitter.Backend.Application.Features.Commands.Tweet.Create;
 using Twitter.Backend.Application.Features.Commands.Tweet.CreateLike;
@@ -19,6 +21,8 @@ public class TweetController : BaseController
     }
     
     [HttpDelete("{Id:guid}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] 
+
     public async Task<IActionResult> DeleteTweet(Guid Id)
     {
         var request = new DeleteTweetRequest() { TweetId = Id };
@@ -27,6 +31,7 @@ public class TweetController : BaseController
     }
     
     [HttpPost]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public async Task<IActionResult> CreateTweet([FromBody] CreateTweetRequest request)
     {
         var response = await _mediator.Send(request);
@@ -54,7 +59,8 @@ public class TweetController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("by-user/feed")] // TODO: Implement Main page tweets.
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet("by-user/feed")] 
     public async Task<IActionResult> FeedByUser([FromQuery] Guid userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var response = await _mediator.Send(new GetMainPageTweetsRequest()
@@ -66,7 +72,7 @@ public class TweetController : BaseController
 
         return Ok(response);
     }
-    [HttpGet("feed")] // TODO: Implement Main page tweets.
+    [HttpGet("feed")] 
     public async Task<IActionResult> Feed( [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var response = await _mediator.Send(new GetMainPageTweetsRequest()

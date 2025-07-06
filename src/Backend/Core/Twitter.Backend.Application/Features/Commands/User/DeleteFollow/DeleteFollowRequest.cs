@@ -4,5 +4,6 @@ namespace Twitter.Backend.Application.Features.Commands.User.DeleteFollow;
 
 public class DeleteFollowRequest : IRequest<DeleteFollowResponse>
 {
-    public Guid Id { get; set; }
+    public Guid FollowerId { get; set; } //who follows
+    public Guid FollowingId { get; set; } //who is being followed
 }

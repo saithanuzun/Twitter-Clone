@@ -2,6 +2,7 @@ using AutoMapper;
 using Twitter.Backend.Application.Features.Commands.Tweet.CreateLike;
 using Twitter.Backend.Application.Features.Commands.User.Create;
 using Twitter.Backend.Application.Features.Commands.User.CreateFollow;
+using Twitter.Backend.Application.Features.Commands.User.Login;
 using Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
 using Twitter.Backend.Application.Features.Queries.User.GetUser;
 using Twitter.Backend.Domain.Entities;
@@ -46,6 +47,10 @@ public class MapProfile : Profile
             .ForMember(i => i.UserId, k => k.MapFrom(k => k.UserId))
             .ReverseMap();
         
+        CreateMap<LoginResponse, User>()
+            .ForMember(i => i.Id, k => k.MapFrom(k => k.Id))
+            .ForMember(i => i.Username, k => k.MapFrom(k => k.Username))
+            .ReverseMap();
 
     }
 }
