@@ -7,7 +7,7 @@ namespace Twitter.Backend.WebApi.Extensions;
 
 public static class AuthRegistration
 {
-    public static IServiceCollection ServiceCollection(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static IServiceCollection AuthRegistrations(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         serviceCollection
             .AddAuthentication(options =>

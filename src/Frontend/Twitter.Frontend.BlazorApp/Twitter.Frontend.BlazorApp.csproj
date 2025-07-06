@@ -11,4 +11,32 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Components\CreateTweetComponent.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UpdateUser.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UserFollowers.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UserFollowing.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UserLikes.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UserReplies.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Components\User\UserTweets.razor" />
+      <_ContentIncludedByDefault Remove="Components\CreateTweetComponent.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UpdateUser.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UserFollowers.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UserFollowing.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UserLikes.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UserReplies.razor" />
+      <_ContentIncludedByDefault Remove="Components\User\UserTweets.razor" />
+      <_ContentIncludedByDefault Remove="Components\Who-to-follow.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Components\CreateTweetComponent.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UpdateUser.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserFollowers.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserFollowing.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserLikes.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserReplies.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserTweets.razor" />
+    </ItemGroup>
+
 </Project>

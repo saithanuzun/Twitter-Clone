@@ -1,0 +1,40 @@
+  <!-- whats's happening -->
+        <div
+          class="w-full border-gray-500/40 border-[0.1px] rounded-3xl flex flex-col mt-4">
+            <h1 class="font-bold text-2xl px-4 py-2">What’s happening</h1>
+            
+          @foreach (var trend in trendingTopics)
+          {
+              <div class="flex p-4 justify-between cursor-pointer hover:bg-black/10 dark:hover:bg-white/5">
+                  <div class="flex flex-col">
+                      <p class="dark:text-white/50 text-black/80 text-sm">
+                          @trend.Location
+                      </p>
+                      <p class="font-bold">@trend.Title</p>
+                  </div>
+                  <i class="fa-solid fa-ellipsis self-center"></i>
+              </div>
+          }
+        </div>
+  <!-- end of whats's happening -->
+  
+  
+ @code {
+     private List<Trend> trendingTopics = new()
+     {
+         new Trend { Title = "#MineCraft" },
+         new Trend { Title = "#ScuderiaFerrari" },
+         new Trend { Title = "#JonSnow" },
+         new Trend { Title = "#LewisHamilton" },
+         new Trend { Title = "#TheWeeknd" },
+         new Trend { Title = "#TeamBlackRhaenyra" },
+     };
+     
+     public class Trend
+     {
+         public string Title { get; set; }
+         public string Location { get; set; } = "Trending in Luxembourg";
+     }
+
+ }
+

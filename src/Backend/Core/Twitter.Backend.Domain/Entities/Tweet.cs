@@ -3,6 +3,7 @@ namespace Twitter.Backend.Domain.Entities;
 public class Tweet : BaseEntity
 {
     public string Content { get; set; }
+    public string MediaUrl { get; set; }
     
     //soft delete
     public bool IsDeleted { get; set; }

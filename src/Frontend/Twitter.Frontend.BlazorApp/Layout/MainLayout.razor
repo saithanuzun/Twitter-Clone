@@ -1,24 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- Left: Profile & Menu -->
-        <div class="col-md-3 bg-light">
-            <UserSidebar />
-        </div>
-
-        <!-- Center: Tweets Feed -->
-        <div class="col-md-6">
-            <TweetFeed />
-        </div>
-
-        <!-- Right: Suggestions -->
-        <div class="col-md-3 bg-light">
-            <RightSidebar />
-        </div>
-    </div>
+<div class="main-layout">
+    <LeftSideBar></LeftSideBar>
+    <TweetFeed></TweetFeed>
+    <RightSidebar></RightSidebar>
 </div>
 
-@code {
-    // Could inject state or theme handling here
-}
+<style>
+    .main-layout {
+        display: flex;
+    }
+    
+    .main-layout > * {
+        flex: 1; /* Optional: Make children grow equally */
+        /* Or set specific widths if needed */
+    }
+
+</style>
+

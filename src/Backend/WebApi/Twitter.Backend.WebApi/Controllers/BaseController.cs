@@ -17,7 +17,6 @@ public abstract class BaseController : ControllerBase
         _mediator = mediator;
     }
 
-    
     public Guid? UserId
     {
         get

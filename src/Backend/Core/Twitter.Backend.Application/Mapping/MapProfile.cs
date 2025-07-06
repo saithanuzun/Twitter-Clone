@@ -35,6 +35,7 @@ public class MapProfile : Profile
             .ForMember(i => i.DeletedDate, k => k.MapFrom(k => k.DeletedDate))
             .ForMember(i => i.ParentTweetId, k => k.MapFrom(k => k.ParentTweetId))
             .ForMember(i => i.RetweetParentId, k => k.MapFrom(k => k.RetweetParentId))
+            .ForMember(i => i.MediaUrl, k => k.MapFrom(k => k.MediaUrl))
             .ReverseMap();
         
         CreateMap<CreateFollowRequest, UserFollow>()

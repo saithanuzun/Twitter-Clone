@@ -18,11 +18,11 @@ public class TweetController : BaseController
 {
     public TweetController(IMediator mediator) : base(mediator)
     {
+        
     }
     
     [HttpDelete("{Id:guid}")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] 
-
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public async Task<IActionResult> DeleteTweet(Guid Id)
     {
         var request = new DeleteTweetRequest() { TweetId = Id };
@@ -61,17 +61,18 @@ public class TweetController : BaseController
     
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpGet("by-user/feed")] 
-    public async Task<IActionResult> FeedByUser([FromQuery] Guid userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    public async Task<IActionResult> FeedByUser([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var response = await _mediator.Send(new GetMainPageTweetsRequest()
         {
-            UserId = userId,
+            UserId = UserId.Value,
             Page = page,
             PageSize = pageSize
         });
 
         return Ok(response);
     }
+    
     [HttpGet("feed")] 
     public async Task<IActionResult> Feed( [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
@@ -83,24 +84,8 @@ public class TweetController : BaseController
 
         return Ok(response);
     }
-    
-    [HttpGet("by-user/{userId:guid}")]
-    public async Task<IActionResult> GetTweetsByUserId(
-        [FromRoute] Guid userId,
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10)
-    {
-        var response = await _mediator.Send(new GetUserTweetsRequest
-        {
-            UserId = userId,
-            Page = page,
-            PageSize = pageSize
-        });
 
-        return Ok(response);
-    }
-    
-    [HttpGet("by-user/{username}")]
+    [HttpGet("/api/tweets/by-user/{username}")]
     public async Task<IActionResult> GetTweetsByUsername(
         [FromRoute] string username,
         [FromQuery] int page = 1,
@@ -115,7 +100,23 @@ public class TweetController : BaseController
 
         return Ok(response);
     }
-   
     
+    /*
+   [HttpGet("by-user/{userId:guid}")]
+   public async Task<IActionResult> GetTweetsByUserId(
+       [FromRoute] Guid userId,
+       [FromQuery] int page = 1,
+       [FromQuery] int pageSize = 10)
+   {
+       var response = await _mediator.Send(new GetUserTweetsRequest
+       {
+           UserId = userId,
+           Page = page,
+           PageSize = pageSize
+       });
+
+       return Ok(response);
+   }
+   */
     
 }

@@ -51,26 +51,32 @@ public class UserController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("{Username}")]
-    public async Task<IActionResult> GetByUsername(string Username)
+    [HttpGet("{username}")]
+    public async Task<IActionResult> GetByUsername(string username)
     {
-        var response = await _mediator.Send(new GetUserRequest() { Username = Username });
+        var response = await _mediator.Send(new GetUserRequest() { Username = username });
         return Ok(response);
     }
 
-    // TODO: change it to get it by username instead of id
-    [HttpGet("{UserId:guid}/followers")]
-    public async Task<IActionResult> GetUserFollowers(Guid UserId)
+    [HttpGet("{username}/followers")]
+    public async Task<IActionResult> GetUserFollowersByUsername(string username)
     {
-        var response = await _mediator.Send(new GetUserFollowersRequest { FollowingId = UserId});
+        var user = await _mediator.Send(new GetUserRequest { Username = username });
+        if (user == null) return NotFound($"User '{username}' not found.");
+
+        var response = await _mediator.Send(new GetUserFollowersRequest { FollowingId = user.Id });
         return Ok(response);
     }
-    
-    [HttpGet("{UserId:guid}/following")]
-    public async Task<IActionResult> GetUserFollowing(Guid UserId)
+
+    [HttpGet("{username}/following")]
+    public async Task<IActionResult> GetUserFollowingByUsername(string username)
     {
-        var response = await _mediator.Send(new GetUserFollowingsRequest() { FollowerUserId = UserId});
+        var user = await _mediator.Send(new GetUserRequest { Username = username });
+        if (user == null) return NotFound($"User '{username}' not found.");
+
+        var response = await _mediator.Send(new GetUserFollowingsRequest { FollowerUserId = user.Id });
         return Ok(response);
     }
+
     
 }

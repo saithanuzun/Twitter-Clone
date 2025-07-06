@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Twitter.Frontend.BlazorApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26d66579c2aef431c356b29b1c540fb0daf688f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96d95011e381a1dff2d92ccabfd1a8b5b6a98c0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Twitter.Frontend.BlazorApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Twitter.Frontend.BlazorApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

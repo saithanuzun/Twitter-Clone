@@ -15,18 +15,18 @@ public class FollowController : BaseController
     {
     }
     
-    [HttpPost("{BeingFollowedId:guid}")]
-    public async Task<IActionResult> CreateFollow(Guid BeingFollowedId)
+    [HttpPost("{beingFollowedId:guid}")]
+    public async Task<IActionResult> CreateFollow(Guid beingFollowedId)
     {
-        var request = new CreateFollowRequest() { FollowerId = UserId.Value, FollowingId = BeingFollowedId };
+        var request = new CreateFollowRequest() { FollowerId = UserId.Value, FollowingId = beingFollowedId };
         var response = await _mediator.Send(request);
         return Ok(response);
     }
     
-    [HttpDelete("{BeingFollowedId:guid}")]
-    public async Task<IActionResult> DeleteFollow(Guid BeingFollowedId)
+    [HttpDelete("{beingFollowedId:guid}")]
+    public async Task<IActionResult> DeleteFollow(Guid beingFollowedId)
     {
-        var request = new DeleteFollowRequest() { FollowerId = UserId.Value, FollowingId = BeingFollowedId };
+        var request = new DeleteFollowRequest() { FollowerId = UserId.Value, FollowingId = beingFollowedId };
         var response = await _mediator.Send(request);
         return Ok(response);
     }

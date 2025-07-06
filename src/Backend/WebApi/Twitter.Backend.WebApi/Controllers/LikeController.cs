@@ -16,19 +16,19 @@ public class LikeController : BaseController
     
     
     [HttpPost]
-    [Route("{TweetId}")]
-    public async Task<IActionResult> CreateLike(Guid TweetId)
+    [Route("/api/{tweetId}/like")]
+    public async Task<IActionResult> CreateLike(Guid tweetId)
     {
-        var request = new CreateLikeRequest() { TweetId = TweetId, UserId = UserId.Value };
+        var request = new CreateLikeRequest() { TweetId = tweetId, UserId = UserId.Value };
         var response = await _mediator.Send(request);
         return Ok(response);
     }
     
     [HttpDelete]
-    [Route("{TweetId}")]
-    public async Task<IActionResult> DeleteLike(Guid TweetId)
+    [Route("/api/{tweetId}/like")]
+    public async Task<IActionResult> DeleteLike(Guid tweetId)
     {
-        var request = new DeleteLikeRequest(){ TweetId = TweetId, UserId = UserId.Value};
+        var request = new DeleteLikeRequest(){ TweetId = tweetId, UserId = UserId.Value};
 
         var response = await _mediator.Send(request);
         return Ok(response);
