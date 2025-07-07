@@ -1,20 +1,13 @@
 ﻿@inherits LayoutComponentBase
+@using Twitter.Frontend.BlazorApp.Pages.Components
+
+
 
 <div class="main-layout">
     <LeftSideBar></LeftSideBar>
-    <TweetFeed></TweetFeed>
+
+    
     <RightSidebar></RightSidebar>
 </div>
 
-<style>
-    .main-layout {
-        display: flex;
-    }
-    
-    .main-layout > * {
-        flex: 1; /* Optional: Make children grow equally */
-        /* Or set specific widths if needed */
-    }
-
-</style>
 

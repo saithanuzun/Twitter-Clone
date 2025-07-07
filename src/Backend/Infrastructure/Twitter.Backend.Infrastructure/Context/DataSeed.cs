@@ -16,6 +16,7 @@ public class DataSeed
                 i => i.Date.Between(DateTime.Now.AddDays(-100), DateTime.Now))
             .RuleFor(i => i.FirstName, i => i.Person.FirstName)
             .RuleFor(i => i.LastName, i => i.Person.LastName)
+            .RuleFor(i => i.DisplayName, i => $"{i.Person.FullName.Trim()}{i.Random.Int(1950,2005)}")
             .RuleFor(i => i.Location, i => i.Address.City())
             .RuleFor(i => i.Bio, i => i.Lorem.Sentence(5))
             .RuleFor(i => i.ImageUrl, i => i.Image.PicsumUrl());
@@ -54,6 +55,7 @@ public class DataSeed
         var userIds = users.Select(i => i.Id);
 
         await context.Users.AddRangeAsync(users);
+        
 
         //tweets
         var tweetGuids = Enumerable.Range(0, 250).Select(i => Guid.NewGuid()).ToList();
@@ -61,6 +63,12 @@ public class DataSeed
 
         var tweets = new Faker<Tweet>("en")
             .RuleFor(i => i.Id, i => tweetGuids[counter++])
+            .RuleFor(t => t.MediaUrl, (k) =>
+            {
+                return k.Random.Int() % 2 == 0 && k.Random.Bool() 
+                    ? k.Image.PlaceImgUrl() 
+                    : null;
+            })
             .RuleFor(i => i.CreatedDate,
                 i => i.Date.Between(DateTime.Now.AddDays(-100), DateTime.Now))
             .RuleFor(i => i.Content, i => i.Lorem.Paragraph(2))
@@ -132,9 +140,19 @@ public class DataSeed
 
         await context.TweetLikes.AddRangeAsync(tweetLikes);
         
-            
+        // For testing it allows users to follow themselves and follow the same user multiple times for taken 50 users.
+        var userFollowId = Enumerable.Range(0, 50).Select(i => Guid.NewGuid()).ToList();
+        var newUserIds = userIds.Take(50);
+        var counter7 = 0;
+        var userFollows = new Faker<UserFollow>("en")
+            .RuleFor(i=>i.Id,i=>userFollowId[counter7++])
+            .RuleFor(i => i.FollowerId, i => i.PickRandom(newUserIds))
+            .RuleFor(i => i.FollowingId, i => i.PickRandom(newUserIds))
+            .Generate(1000);
 
-
+        await context.UserFollows.AddRangeAsync(userFollows);
+        
+        
         await context.SaveChangesAsync();
     }
 }
