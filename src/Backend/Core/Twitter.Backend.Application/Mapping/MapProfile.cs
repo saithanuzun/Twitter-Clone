@@ -18,6 +18,7 @@ public class MapProfile : Profile
         CreateMap<User, GetUserResponse>()
             .ForMember(i => i.Username, k => k.MapFrom(k => k.Username))
             .ForMember(i => i.Email, k => k.MapFrom(k => k.Email))
+            .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.Profile.DisplayName))
             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Profile.FirstName))
             .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Profile.LastName))
             .ForMember(dest => dest.Bio, opt => opt.MapFrom(src => src.Profile.Bio))

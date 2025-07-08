@@ -33,6 +33,7 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest,UpdateUserRes
                 Id = dbUser.Profile.Id,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
+                DisplayName = request.DisplayName,
                 Bio = request.Bio,
                 Location = request.Location,
                 ImageUrl = request.ImageUrl,

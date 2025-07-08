@@ -1,7 +1,0 @@
-.main-layout {
-    display: flex;
-}
-
-.main-layout > * {
-    flex: 1;
-}

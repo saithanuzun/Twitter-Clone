@@ -31,12 +31,6 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Pages\Components\CreateTweetComponent.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UpdateUser.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UserFollowers.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UserFollowing.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UserLikes.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UserReplies.razor" />
-      <AdditionalFiles Include="Pages\Components\User\UserTweets.razor" />
     </ItemGroup>
 
 </Project>

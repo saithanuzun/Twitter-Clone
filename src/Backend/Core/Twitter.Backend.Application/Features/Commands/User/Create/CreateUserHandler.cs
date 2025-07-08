@@ -36,6 +36,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserRequest,CreateUserRes
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
+                DisplayName = request.DisplayName,
                 Bio = request.Bio,
                 Location = request.Location,
                 ImageUrl = request.ImageUrl,

@@ -16,6 +16,7 @@ public class CreateFollowHandler :IRequestHandler<CreateFollowRequest,CreateFoll
         _mapper = mapper;
     }
 
+    // todo : add validation You cannot follow yourself, you cannot follow second time same person
     public async Task<CreateFollowResponse> Handle(CreateFollowRequest request, CancellationToken cancellationToken)
     {
         var dbFollow = _mapper.Map<UserFollow>(request);

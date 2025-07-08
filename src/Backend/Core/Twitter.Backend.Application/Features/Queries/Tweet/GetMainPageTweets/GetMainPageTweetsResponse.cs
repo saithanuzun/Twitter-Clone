@@ -7,6 +7,7 @@ public class GetMainPageTweetsResponse
     public DateTime CreatedDate { get; set; }
     public Guid Id { get; set; }
     public string Content { get; set; }
+    public string? MediaUrl { get; set; }
     
     public bool IsDeleted { get; set; }
     public DateTime DeletedDate { get; set; }

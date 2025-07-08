@@ -25,6 +25,7 @@ public class
         {
             Id = i.Id,
             Content = i.Content,
+            MediaUrl = i.MediaUrl,
             CreatedDate = i.CreatedDate,
             IsDeleted = i.IsDeleted,
             DeletedDate = i.DeletedDate,
