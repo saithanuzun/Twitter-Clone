@@ -18,7 +18,20 @@ public class GetUserFollowersHandler : IRequestHandler<GetUserFollowersRequest,G
             .Get(i => i.FollowingId == request.FollowingId)
             .Select(i=>i.FollowerId)
             .ToList();
+        
+        var followingUserNames = _followRepository
+            .Get(i => i.Following.Username == request.Username)
+            .Select(i=>i.Follower.Username)
+            .ToList();
 
-        return new GetUserFollowersResponse() { FollowingUserIds = followingUserIds};
+
+        return new GetUserFollowersResponse()
+        {
+            FollowingUserIds = followingUserIds,
+            FollowersCount = followingUserIds.Count, 
+            Username = request.Username, 
+            UserId = request.FollowingId,
+            Usernames = followingUserNames,
+        };
     }
 }
