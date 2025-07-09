@@ -1,7 +1,38 @@
-
 @page "/Login"
-<h3>Login</h3>
 
-@code {
-    
-}
+@layout EmptyLayout
+
+
+<div class="flex w-full h-screen">
+    <!-- Left side (white background) -->
+    <div class="w-1/2 bg-white">
+        <div class="flex items-center justify-center h-full">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" class="w-64 h-64" alt="logo"/>
+        </div>
+    </div>
+
+    <!-- Right side (black background) -->
+    <div class="w-1/2 bg-black flex items-center justify-center">
+        <div class="flex flex-col items-center justify-center space-y-6 w-full max-w-md p-6">
+            <p class="text-white text-3xl font-bold">HAPPENING NOW</p>
+            <p class="text-white text-xl">JOIN TODAY</p>
+
+            <div class="w-full">
+                <label class="text-white block mb-1">Email</label>
+                <input class="w-full p-2 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" placeholder="Enter your email"/>
+            </div>
+
+            <div class="w-full">
+                <label class="text-white block mb-1">Password</label>
+                <input class="w-full p-2 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" placeholder="Enter your password"/>
+            </div>
+
+            <button class="w-full bg-white hover:bg-gray text-black font-semibold py-2 px-4 rounded transition duration-300">
+                Login
+            </button>
+            <p class="text-white block mb-1">Don't have an account? <a href="/sign-up" class="hover:text-blue">Sign up!</a></p>
+
+
+        </div>
+    </div>
+</div>
