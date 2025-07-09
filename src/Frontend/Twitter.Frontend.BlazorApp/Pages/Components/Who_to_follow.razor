@@ -1,50 +1,34 @@
-       
-<div
-          class="w-full border-gray-500/40 border-[0.1px] rounded-3xl flex flex-col my-6">
-          <h1 class="font-bold text-xl px-4 py-2">Who to Follow</h1>
-          <div
-            class="flex items-center p-3 py-4 gap-4 hover:bg-black/10 dark:hover:bg-white/5">
-            <img
-              src="./assets/whoTF-1.jpg"
-              alt=""
-              class="rounded-full w-10 h-10"/>
-            <div class="flex flex-col cursor-pointer">
-              <p class="font-bold hover:bg-black/10 dark:hover:underline">
-                MINIMALIST BAKER
-              </p>
-              <p class="dark:text-white/50 text-black/80 text-sm">
-                @@minimalistbaker
-              </p>
+<div class="w-full border-gray-500/40 border-[0.1px] rounded-3xl flex flex-col my-6">
+    <h1 class="font-bold text-xl px-4 py-2">Who to Follow</h1>
+
+    @foreach (var user in Suggestions)
+    {
+        <a href="/user">
+            <div class="flex items-center p-3 py-4 gap-4 hover:bg-black/10 dark:hover:bg-white/5">
+                <img src="@user.ImagePath" alt="" class="rounded-full w-10 h-10"/>
+                <div class="flex flex-col cursor-pointer">
+                    <p class="font-bold hover:bg-black/10 dark:hover:underline">@user.Name</p>
+                    <p class="dark:text-white/50 text-black/80 text-sm">@user.Handle</p>
+                </div>
             </div>
-          </div>
-          <div
-            class="flex items-center p-3 py-4 gap-4 hover:bg-black/10 dark:hover:bg-white/5">
-            <img
-              src="./assets/whoTF-2.jpg"
-              alt=""
-              class="rounded-full w-10 h-10"/>
-            <div class="flex flex-col">
-              <p class="font-bold hover:bg-black/10 dark:hover:underline">
-                11:11 QUOTES
-              </p>
-              <p class="dark:text-white/50 text-black/80 text-sm">
-                @@ElevenElevenQts
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex items-center p-3 py-4 gap-4 hover:bg-black/10 dark:hover:bg-white/5">
-            <img
-              src="./assets/whoTF-3.jpeg"
-              alt=""
-              class="rounded-full w-10 h-10"/>
-            <div class="flex flex-col">
-              <p class="font-bold hover:bg-black/10 dark:hover:underline">
-                Vincent Gogh
-              </p>
-              <p class="dark:text-white/50 text-black/80 text-sm">
-                @@VinceVanGogh
-              </p>
-            </div>
-          </div>
-        </div>
+        </a>
+    }
+</div>
+
+@code {
+
+    public class UserSuggestion
+    {
+        public string Name { get; set; }
+        public string Handle { get; set; }
+        public string ImagePath { get; set; }
+    }
+
+    private List<UserSuggestion> Suggestions = new()
+    {
+        new UserSuggestion { Name = "MINIMALIST BAKER", Handle = "@@minimalistbaker", ImagePath = "./assets/whoTF-1.jpg" },
+        new UserSuggestion { Name = "11:11 QUOTES", Handle = "@@ElevenElevenQts", ImagePath = "./assets/whoTF-2.jpg" },
+        new UserSuggestion { Name = "Vincent Gogh", Handle = "@@VinceVanGogh", ImagePath = "./assets/whoTF-3.jpeg" }
+    };
+
+}

@@ -52,8 +52,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcG9uZW50cy9Ud2VldENhcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Components/User/UserProfile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcG9uZW50cy9Vc2VyL1VzZXJQcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Components/Who_to_follow.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcG9uZW50cy9XaG9fdG9fZm9sbG93LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Explore/Explore.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXhwbG9yZS9FeHBsb3JlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/Home/FollowingFeed.razor]
@@ -104,16 +112,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyTGlrZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserNavbar.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyTmF2YmFyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserReplies.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyUmVwbGllcy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/Pages/User/UserTweets.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Vc2VyVHdlZXRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Frontend/Twitter.Frontend.BlazorApp/_Imports.razor]

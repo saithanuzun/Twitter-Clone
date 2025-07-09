@@ -24,6 +24,11 @@ public class GetHashtagTweetHandler : IRequestHandler<GetHashtagTweetRequest,Get
             .Select(i=>i.TweetId)
             .ToList();
 
-        return new GetHashtagTweetResponse() { HashtagId = request.HashtagId, Tag = request.Tag, HashtagTweetsIds = tweets };
+        return new GetHashtagTweetResponse() {
+            HashtagId = request.HashtagId, 
+            Tag = request.Tag, 
+            HashtagTweetsIds = tweets , 
+            TweetsCount = tweets.Count
+        };
     }
 }
