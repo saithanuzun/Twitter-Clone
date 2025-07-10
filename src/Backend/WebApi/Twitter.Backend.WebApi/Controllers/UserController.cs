@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Twitter.Backend.Application.Features.Commands.User.Create;
 using Twitter.Backend.Application.Features.Commands.User.Update;
 using Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
+using Twitter.Backend.Application.Features.Queries.User.GetFollowSuggestions;
 using Twitter.Backend.Application.Features.Queries.User.GetUser;
 using Twitter.Backend.Application.Features.Queries.User.GetUserFollowers;
 using Twitter.Backend.Application.Features.Queries.User.GetUserFollowings;
@@ -75,6 +76,14 @@ public class UserController : BaseController
         if (user == null) return NotFound($"User '{username}' not found.");
 
         var response = await _mediator.Send(new GetUserFollowingsRequest { FollowerUserId = user.Id });
+        return Ok(response);
+    }
+    
+    [HttpGet("suggestions/{userId:guid}")]
+    public async Task<IActionResult> GetUserFollowSuggestion(Guid userId)
+    {
+        var response = await _mediator.Send(new FollowSuggestionRequest(){UserId = userId});
+        
         return Ok(response);
     }
 

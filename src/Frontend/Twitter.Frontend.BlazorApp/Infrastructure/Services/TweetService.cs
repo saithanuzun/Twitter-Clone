@@ -23,21 +23,23 @@ public class TweetService : ITweetService
         throw new NotImplementedException();
     }
 
-    public Task<PagedViewModel<TweetDvo>> GetProfilePageEntries(int page, int pageSize, string userName = null)
+    public Task<PagedViewModel<TweetDvo>> GetUserTweets(int page, int pageSize, string userName = null)
     {
         throw new NotImplementedException();
-
     }
 
-    public Task<PagedViewModel<TweetDvo>> GetEntryComments(Guid entryId, int page, int pageSize)
+    public Task<PagedViewModel<TweetDvo>> GetTweetReplies(Guid entryId, int page, int pageSize)
     {
         throw new NotImplementedException();
-
     }
 
-    public Task<Guid> CreateEntry(CreateTweetDto command)
+    public Task<Guid> CreateTweet(CreateTweetDto command)
     {
         throw new NotImplementedException();
-        
+    }
+
+    public Task<List<Guid>> GetHashtagTweets(string tag)
+    {
+        throw new NotImplementedException();
     }
 }
