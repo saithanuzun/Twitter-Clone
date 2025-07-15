@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Twitter.Frontend.BlazorApp.Infrastructure.Models.Dvos;
 using Twitter.Frontend.BlazorApp.Infrastructure.Services.Interfaces;
 
@@ -5,14 +6,33 @@ namespace Twitter.Frontend.BlazorApp.Infrastructure.Services;
 
 public class UserService : IUserService
 {
-    public Task<UserDetailsDvo> GetUserDetail(Guid? id)
+    private HttpClient _client;
+
+    public UserService(HttpClient client)
     {
-        throw new NotImplementedException();
+        _client = client;
     }
 
-    public Task<UserDetailsDvo> GetUserDetail(string userName)
+    public async Task<UserDetailsDvo> GetUserDetails(Guid? id)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"/api/user/{id}");
+        
+        var json = await response.Content.ReadAsStringAsync();
+        
+        var result = JsonSerializer.Deserialize<UserDetailsDvo>(json);
+        
+        return result;
+    }
+
+    public async Task<UserDetailsDvo> GetUserDetails(string userName)
+    {
+        var response = await _client.GetAsync($"/api/user/{userName}");
+        
+        var json = await response.Content.ReadAsStringAsync();
+        
+        var result = JsonSerializer.Deserialize<UserDetailsDvo>(json);
+        
+        return result;
     }
 
     public Task<bool> UpdateUser(UserDetailsDvo user)
@@ -23,5 +43,31 @@ public class UserService : IUserService
     public Task<bool> ChangeUserPassword(string oldPassword, string newPassword)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<FollowSuggestionDvo> FollowSuggestions(Guid UserId)
+    {
+        Console.WriteLine("Starting GetHashtags...");
+
+        var response = await _client.GetAsync($"/api/user/suggestions/{UserId}");
+        Console.WriteLine($"Response received. Status code: {response.StatusCode}");
+
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Raw JSON: {json}");
+
+        var result = JsonSerializer.Deserialize<FollowSuggestionDvo>(json);
+
+        if (result == null)
+        {
+            Console.WriteLine("Deserialization failed: dvo is null.");
+        }
+        else
+        {
+            Console.WriteLine($"Deserialization succeeded. Hashtags count: {result.UserIds.Count().ToString()}");
+        }
+
+        return result;
     }
 }

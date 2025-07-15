@@ -1,0 +1,58 @@
+@page "/tweet/{id:guid}"
+
+<div>
+    
+        <p style="color:red;">Invalid tweet ID</p>
+    
+    
+        <p>Loading tweet...</p>
+    
+    
+    
+        <TweetCard tweet="tweetViewModel" />
+    
+</div>
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+
+    [Inject]
+    public ITweetService _tweetService { get; set; }
+
+    TweetViewModel tweetViewModel = new();
+    bool isInvalidId = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!Guid.TryParse(id, out var tweetId))
+        {
+            isInvalidId = true;
+            return;
+        }
+
+        try
+        {
+            var tweetDvo = await _tweetService.GetTweet(tweetId.ToString());
+
+            tweetViewModel = new TweetViewModel
+            {
+                
+                Id = Guid.Parse(tweetDvo.Id),
+                Content = tweetDvo.Content,
+                Time = tweetDvo.CreatedDate.ToString("g"),
+                ProfileName = tweetDvo.UserProfilePic,
+                MediaUrl = tweetDvo.MediaUrl,
+                ProfilePic = tweetDvo.UserProfilePic,
+                Username = tweetDvo.UserUsername,
+                LikesCount = tweetDvo.LikeCount,
+                RepliesCount = tweetDvo.RepliesCount,
+                RetweetsCount = tweetDvo.RetweetCount
+            };
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading tweet: " + ex.Message);
+        }
+    }
+}

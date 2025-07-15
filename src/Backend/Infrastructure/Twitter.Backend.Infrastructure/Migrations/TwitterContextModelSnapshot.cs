@@ -68,6 +68,9 @@ namespace Twitter.Backend.Infrastructure.Migrations
                     b.Property<bool>("IsRetweet")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("MediaUrl")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("ModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
@@ -223,6 +226,10 @@ namespace Twitter.Backend.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

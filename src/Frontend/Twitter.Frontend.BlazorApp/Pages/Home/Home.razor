@@ -6,91 +6,86 @@
 @page "/home"
 
 
-
 <!-- navbar -->
 <div
-    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20"
->
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
     <NavLink href="/feed/for-you" class="w-1/2 h-full">
         <div
-            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative"
-        >
+            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
             <h2 class="font-semibold">For You</h2>
             <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
         </div>
     </NavLink>
-    
+
     <NavLink href="/feed/following" class="w-1/2 h-full">
         <div
-        class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer"
-    >
-        <h2 class="font-semibold text-center self-center text-gray-400">
-            Following
-        </h2>
-    </div>
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400">
+                Following
+            </h2>
+        </div>
     </NavLink>
 </div>
 
 <!-- end of navbar -->
 
-    <CreateTweetComponent></CreateTweetComponent>
+<CreateTweetComponent></CreateTweetComponent>
 
- <!-- MID PART -->
-    <div class="flex flex-col w-full items-center">
-      <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
         <!-- POST section -->
         <div class="flex flex-col">
-          @foreach (var post in tweets)
-          {
-            <TweetCard tweet="post"></TweetCard>
-          }
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
         </div>
-      </section>
-    </div>
+    </section>
+</div>
 
- <!-- END OF MID PART -->
- 
- @code
- {
-   List<TweetViewModel> tweets = new List<TweetViewModel>{
-    new TweetViewModel()
+<!-- END OF MID PART -->
+
+@code
+{
+    List<TweetViewModel> tweets = new List<TweetViewModel>
     {
-        Username = "johndoe",
-        ProfileName = "John Doe",
-        Time = "2h",
-        Content = "Just finished a great run in the park! #fitness",
-        ProfilePic = "https://randomuser.me/api/portraits/men/1.jpg",
-        MediaUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-        RepliesCount = 5,
-        RetweetsCount = 12,
-        LikesCount = 45
-    },
-    new TweetViewModel()
-    {
-        Username = "janedoe",
-        ProfileName = "Jane Doe",
-        Time = "30m",
-        Content = "Loving the new coffee shop downtown ☕️ #coffeetime",
-        ProfilePic = "https://randomuser.me/api/portraits/women/2.jpg",
-        MediaUrl = "https://images.unsplash.com/photo-1525059337994-8e7d6bb0f01f",
-        RepliesCount = 2,
-        RetweetsCount = 3,
-        LikesCount = 18
-    },
-    new TweetViewModel()
-    {
-        Username = "techguru",
-        ProfileName = "Tech Guru",
-        Time = "10m",
-        Content = "Excited about the upcoming AI conference next week! 🤖 #AI2025",
-        ProfilePic = "https://randomuser.me/api/portraits/men/3.jpg",
-        MediaUrl = "",
-        RepliesCount = 10,
-        RetweetsCount = 8,
-        LikesCount = 60
-    }
+        new TweetViewModel()
+        {
+            Username = "johndoe",
+            ProfileName = "John Doe",
+            Time = "2h",
+            Content = "Just finished a great run in the park! #fitness",
+            ProfilePic = "https://randomuser.me/api/portraits/men/1.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            RepliesCount = 5,
+            RetweetsCount = 12,
+            LikesCount = 45
+        },
+        new TweetViewModel()
+        {
+            Username = "janedoe",
+            ProfileName = "Jane Doe",
+            Time = "30m",
+            Content = "Loving the new coffee shop downtown ☕️ #coffeetime",
+            ProfilePic = "https://randomuser.me/api/portraits/women/2.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1525059337994-8e7d6bb0f01f",
+            RepliesCount = 2,
+            RetweetsCount = 3,
+            LikesCount = 18
+        },
+        new TweetViewModel()
+        {
+            Username = "techguru",
+            ProfileName = "Tech Guru",
+            Time = "10m",
+            Content = "Excited about the upcoming AI conference next week! 🤖 #AI2025",
+            ProfilePic = "https://randomuser.me/api/portraits/men/3.jpg",
+            MediaUrl = "",
+            RepliesCount = 10,
+            RetweetsCount = 8,
+            LikesCount = 60
+        }
     };
 
- }
- 
-
+}

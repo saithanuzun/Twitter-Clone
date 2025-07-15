@@ -1,7 +1,72 @@
 @page "/update-user"
 
-<h3>UpdateUser</h3>
+<body class="flex items-center justify-center">
+<div class="bg-white  rounded-xl  w-full  h-screen ">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Edit Profile</h2>
 
-@code {
-    
-}
+    <form>
+        <!-- Profile Image Section -->
+        <div class="flex flex-col items-center mb-8">
+            <div class="relative w-32 h-32 rounded-full overflow-hidden border-4 border-black shadow-md">
+                <img id="profile-image-preview" src="https://placehold.co/128x128/a0aec0/ffffff?text=Upload" alt="Profile Picture" class="w-full h-full object-cover">
+                <label for="imageUrl" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white cursor-pointer opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        
+                    </svg>
+                </label>
+            </div>
+            <input type="file" id="imageUrl" name="ImageUrl" class="hidden" accept="image/*" onchange="previewImage(event)">
+            <p class="text-sm text-gray-500 mt-2">Click to change profile picture</p>
+        </div>
+
+        <!-- Grid for Name and Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                <input type="text" id="firstName" name="FirstName" placeholder="John" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+            <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                <input type="text" id="lastName" name="LastName" placeholder="Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" id="email" name="Email" placeholder="john.doe@example.com" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input type="password" id="password" name="Password" placeholder="********" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+                <p class="text-xs text-gray-500 mt-1">Leave blank to keep current password</p>
+            </div>
+        </div>
+
+        <!-- Single Column Fields -->
+        <div class="mb-6 space-y-6">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                <input type="text" id="username" name="Username" placeholder="johndoe_official" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+            <div>
+                <label for="displayName" class="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+                <input type="text" id="displayName" name="DisplayName" placeholder="John Doe" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+            <div>
+                <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                <textarea id="bio" name="Bio" rows="4" placeholder="Tell us about yourself..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 resize-y"></textarea>
+            </div>
+            <div>
+                <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                <input type="text" id="location" name="Location" placeholder="New York, USA" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200">
+            </div>
+        </div>
+
+        <!-- Save Changes Button -->
+        <div class="flex justify-end">
+            <button type="submit" class="px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+
+</body>

@@ -1,3 +1,4 @@
+@using Twitter.Frontend.BlazorApp.Infrastructure.Services.Interfaces
 <!-- whats's happening -->
 <div
     class="w-full border-gray-500/40 border-[0.1px] rounded-3xl flex flex-col mt-4">
@@ -10,7 +11,7 @@
                 <p class="dark:text-white/50 text-black/80 text-sm">
                     Trending in UK
                 </p>
-                <p class="font-bold">@trend.Title</p>
+                <p class="font-bold">@trend</p>
             </div>
             <i class="fa-solid fa-ellipsis self-center"></i>
         </div>
@@ -19,23 +20,25 @@
 <!-- end of whats's happening -->
 
 
-
 @code {
 
-    private List<Trend> trendingTopics = new()
-    {
-        new Trend { Title = "#MineCraft" },
-        new Trend { Title = "#ScuderiaFerrari" },
-        new Trend { Title = "#JonSnow" },
-        new Trend { Title = "#LewisHamilton" },
-        new Trend { Title = "#TheWeeknd" },
-        new Trend { Title = "#TeamBlackRhaenyra" },
-    };
+    private List<string> trendingTopics = new();
 
-    public class Trend
+    
+   
+
+    [Inject]
+    IHashtagService _HashtagService { get; set; }
+    
+
+    protected override async Task OnInitializedAsync()
     {
-        public string Title { get; set; }
-        public string Location { get; set; } = "Trending in Luxembourg";
+        var result= await _HashtagService.GetHashtags();
+        
+        trendingTopics = result.Hashtags.Take(7).ToList();
+        
+        await base.OnInitializedAsync();
     }
+
 
 }

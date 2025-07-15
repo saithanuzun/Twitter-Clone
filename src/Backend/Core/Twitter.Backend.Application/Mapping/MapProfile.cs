@@ -25,8 +25,8 @@ public class MapProfile : Profile
             .ForMember(dest => dest.Location, opt => opt.MapFrom(src => src.Profile.Location))
             .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Profile.ImageUrl))
             .ReverseMap();
-
-        CreateMap<GetTweetResponse, Tweet>()
+        
+        /*CreateMap<GetTweetResponse, Tweet>()
             .ForMember(i => i.UserId, k => k.MapFrom(k => k.UserId))
             .ForMember(i => i.Content, k => k.MapFrom(k => k.Content))
             .ForMember(i => i.Id, k => k.MapFrom(k => k.Id))
@@ -37,7 +37,7 @@ public class MapProfile : Profile
             .ForMember(i => i.ParentTweetId, k => k.MapFrom(k => k.ParentTweetId))
             .ForMember(i => i.RetweetParentId, k => k.MapFrom(k => k.RetweetParentId))
             .ForMember(i => i.MediaUrl, k => k.MapFrom(k => k.MediaUrl))
-            .ReverseMap();
+            .ReverseMap(); */
         
         CreateMap<CreateFollowRequest, UserFollow>()
             .ForMember(i => i.FollowerId, k => k.MapFrom(k => k.FollowerId))

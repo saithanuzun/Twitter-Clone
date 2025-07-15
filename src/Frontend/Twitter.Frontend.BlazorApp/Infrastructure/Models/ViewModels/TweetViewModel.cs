@@ -2,6 +2,7 @@ namespace Twitter.Frontend.BlazorApp.Infrastructure.Models.ViewModels;
 
 public class TweetViewModel
 {
+    public Guid Id { get; set; }
     public string Username { get; set; } 
     public string ProfileName { get; set; } 
     public string Time { get; set; } 

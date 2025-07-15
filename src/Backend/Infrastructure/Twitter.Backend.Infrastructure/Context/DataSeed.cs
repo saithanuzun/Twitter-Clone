@@ -141,8 +141,8 @@ public class DataSeed
         await context.TweetLikes.AddRangeAsync(tweetLikes);
         
         // For testing it allows users to follow themselves and follow the same user multiple times for taken 50 users.
-        var userFollowId = Enumerable.Range(0, 50).Select(i => Guid.NewGuid()).ToList();
-        var newUserIds = userIds.Take(50);
+        var userFollowId = Enumerable.Range(0, 1000).Select(i => Guid.NewGuid()).ToList();
+        var newUserIds = userIds.Take(50).ToList();
         var counter7 = 0;
         var userFollows = new Faker<UserFollow>("en")
             .RuleFor(i=>i.Id,i=>userFollowId[counter7++])

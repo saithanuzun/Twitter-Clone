@@ -4,6 +4,6 @@ namespace Twitter.Frontend.BlazorApp.Infrastructure.Services.Interfaces;
 
 public interface IHashtagService
 {
-    Task<List<HashtagDvo>> GetHashtags();
+    Task<HashtagsDvo> GetHashtags();
     
 }
