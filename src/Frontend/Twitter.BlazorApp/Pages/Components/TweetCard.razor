@@ -1,0 +1,71 @@
+@using Twitter.BlazorApp.Infrastructure.Models.Dvos
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+
+@code {
+
+    [Parameter]
+    public TweetViewModel tweet { get; set; }
+
+}
+
+<a href="@($"/tweet/{tweet.Id}")" class="text-gray-800 no-underline hover:text-gray-800 hover:underline-0 cursor-pointer">
+    <div class="hover:bg-black/10 dark:hover:bg-white/[0.03] cursor-pointer transition ease-in-out py-3 w-full flex flex-col gap-2 p-3 border-gray-500/40 border-b-[0.1px]">
+        <div class="flex px-2 items-start gap-4">
+            <div class="w-10 h-10">
+                <img src="@tweet.ProfilePic" alt="" class="object-cover rounded-full"/>
+            </div>
+            <div class="flex flex-col">
+                <div class="flex gap-1">
+                    <div class="font-semibold flex gap-3 items-center">
+                        <h2>@tweet.ProfileName</h2>
+                    </div>
+                    <p class="opacity-50">@($"@{tweet.Username}")</p>
+                    <p class="opacity-50">· @tweet.Time</p>
+                </div>
+                <p>@tweet.Content</p>
+            </div>
+        </div>
+
+        <div class="p-3 self-center sm:w-[85%] h-auto">
+            <img src="@tweet.MediaUrl" alt="" class="object-cover rounded-2xl max-w-[100%] h-auto"/>
+        </div>
+
+
+        <div class="flex justify-between sm:w-[80%] w-[95%] self-center text-gray-600 text-sm mt-2">
+
+            <!-- Replies Button -->
+            <button @onclick="ShowReplies" class="flex items-center gap-1 hover:text-blue-500 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2H7l-5 4V5z"/>
+                </svg>
+                <span>@tweet.RepliesCount</span>
+            </button>
+
+            <!-- Like Button -->
+            <button @onclick="ToggleLike" class="flex items-center gap-1 hover:text-red-500 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-red-500" viewBox="0 0 20 20">
+                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z"/>
+                </svg>
+                <span>@tweet.LikesCount</span>
+            </button>
+        </div>
+    </div>
+</a>
+
+@code {
+
+    private void ShowReplies()
+    {
+    // Show a modal, toggle a reply panel, or navigate
+        Console.WriteLine($"Show replies for tweet {tweet.Id}");
+    }
+
+    private void ToggleLike()
+    {
+    // Call API or change state
+        Console.WriteLine($"Liked tweet {tweet.Id}");
+        tweet.LikesCount++;
+        StateHasChanged();
+    }
+
+}

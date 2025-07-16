@@ -1,24 +1,36 @@
-@page "/hashtags"
+﻿@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
 @using Twitter.BlazorApp.Infrastructure.Models.ViewModels
 
-<!-- whats's happening -->
+@page "/"
+@page "/feed/for-you"
+@page "/home"
+
+
+<!-- navbar -->
 <div
-    class="w-full border-gray-500/40 border-[0.1px] flex flex-col mt-4">
-    <h1 class="font-bold text-2xl px-4 py-2">What’s happening</h1>
-
-
-    <div class="flex p-4 justify-between cursor-pointer hover:bg-black/10 dark:hover:bg-white/5">
-        <div class="flex flex-col">
-            <p class="dark:text-white/50 text-black/80 text-sm">
-                Trending in UK
-            </p>
-            <p class="font-bold">asfdasdf asdfasdf</p>
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
+    <NavLink href="/feed/for-you" class="w-1/2 h-full">
+        <div
+            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
+            <h2 class="font-semibold">For You</h2>
+            <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
         </div>
-        <i class="fa-solid fa-ellipsis self-center"></i>
-    </div>
+    </NavLink>
 
+    <NavLink href="/feed/following" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400">
+                Following
+            </h2>
+        </div>
+    </NavLink>
 </div>
-<!-- end of whats's happening -->
+
+<!-- end of navbar -->
+
+<CreateTweetComponent></CreateTweetComponent>
+
 <!-- MID PART -->
 <div class="flex flex-col w-full items-center">
     <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
@@ -40,6 +52,7 @@
     {
         new TweetViewModel()
         {
+            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
             Username = "johndoe",
             ProfileName = "John Doe",
             Time = "2h",
@@ -52,6 +65,7 @@
         },
         new TweetViewModel()
         {
+            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
             Username = "janedoe",
             ProfileName = "Jane Doe",
             Time = "30m",
@@ -64,6 +78,7 @@
         },
         new TweetViewModel()
         {
+            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
             Username = "techguru",
             ProfileName = "Tech Guru",
             Time = "10m",

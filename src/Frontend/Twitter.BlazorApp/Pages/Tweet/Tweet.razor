@@ -1,0 +1,97 @@
+@page "/tweet/{id}"
+
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+
+<div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+    <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200" onclick="history.back()">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 text-gray-700 dark:text-gray-300">
+            <g>
+                <path d="M7.414 12L12.707 6.707 11.293 5.293 4.586 12l6.707 6.707 1.414-1.414L7.414 12z"></path>
+            </g>
+        </svg>
+    </button>
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white flex-grow text-center">Tweet</h2>
+    <div class="w-8"></div>
+</div>
+
+<div class="hover:bg-black/10 dark:hover:bg-white/[0.03] cursor-pointer transition ease-in-out py-3 w-full flex flex-col gap-2 p-3 border-gray-500/40 border-b-[0.1px]">
+    <div class="flex px-2 items-start gap-4">
+        <div class="w-12 h-12">
+            <img src="@tweetViewModel.ProfilePic" alt="" class="object-cover rounded-full"/>
+        </div>
+        <div class="flex flex-col">
+            <div class="flex gap-1">
+                <div class="font-semibold flex gap-3 items-center">
+                    <h2>@tweetViewModel.ProfileName</h2>
+                </div>
+                <p class="opacity-50">@($"@{tweetViewModel.Username}")</p>
+                <p class="opacity-50">· @tweetViewModel.Time</p>
+            </div>
+            <p>@tweetViewModel.Content</p>
+        </div>
+    </div>
+
+    <div class="p-3 self-center sm:w-[85%] h-auto">
+        <img src="@tweetViewModel.MediaUrl" alt="" class="object-cover rounded-2xl max-w-[100%] h-auto"/>
+    </div>
+
+
+    <div class="flex justify-between sm:w-[80%] w-[95%] self-center">
+        <div class="flex gap-1 items-center">
+            <span>💬</span> <span>@tweetViewModel.RepliesCount</span>
+        </div>
+
+        <div class="flex gap-1 items-center">
+            <span>❤️</span> <span>@tweetViewModel.LikesCount</span>
+        </div>
+    </div>
+</div>
+
+<CreateTweetComponent></CreateTweetComponent>
+
+<TweetCard tweet="tweetViewModel"/>
+
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    [Inject]
+    public ITweetService _tweetService { get; set; }
+
+    TweetViewModel tweetViewModel = new TweetViewModel()
+    {
+        Id = "sdfsdf",
+        Username = "techguru",
+        ProfileName = "Tech Guru",
+        Time = "10m",
+        Content = "Excited about the upcoming AI conference next week! 🤖 #AI2025",
+        ProfilePic = "https://randomuser.me/api/portraits/men/3.jpg",
+        MediaUrl = "",
+        RepliesCount = 10,
+        RetweetsCount = 8,
+        LikesCount = 60
+    };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var tweetDvo = await _tweetService.GetTweet(id);
+
+        tweetViewModel = new TweetViewModel
+        {
+            Id = tweetDvo.Id,
+            Content = tweetDvo.Content,
+            Time = tweetDvo.CreatedDate.ToString("g"),
+            ProfileName = tweetDvo.UserDisplayName,
+            MediaUrl = tweetDvo.MediaUrl,
+            ProfilePic = tweetDvo.UserProfilePic,
+            Username = tweetDvo.UserUsername,
+            LikesCount = tweetDvo.LikeCount,
+            RepliesCount = tweetDvo.RepliesCount,
+            RetweetsCount = tweetDvo.RetweetCount,
+        };
+    }
+
+}

@@ -46,8 +46,4 @@
       <AdditionalFiles Include="Pages\User\UserReplies.razor" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\Tweet" />
-    </ItemGroup>
-
 </Project>
