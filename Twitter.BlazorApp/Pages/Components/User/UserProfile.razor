@@ -1,0 +1,77 @@
+@code {
+
+    [Parameter]
+    public UserProfileViewModel User { get; set; }
+
+}@using System.Globalization
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+
+<div class="mx-auto bg-white rounded-xl">
+    <div class="relative h-48 bg-gray-300 overflow-hidden">
+        <img src="@User.BannerImageUrl"
+             alt="Profile Banner"
+             class="w-full h-full object-cover">
+        <button class="absolute top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md
+                       hover:bg-gray-700 transition-colors duration-200">
+            Edit Profile
+        </button>
+    </div>
+
+    <div class="relative p-6 md:p-8 md:pt-6">
+        <div class="absolute -top-10 left-6 md:left-8">
+            <img src="@User.ProfileImageUrl"
+                 alt="Profile Picture"
+                 class="w-30 h-30 md:w-36 md:h-36 rounded-full border-4 border-white shadow-md object-cover">
+        </div>
+
+        <div class="flex justify-end pt-4 md:pt-5">
+            <button class="px-6 py-2 bg-blue-500 text-white rounded-full text-base font-semibold shadow-md
+                           hover:bg-blue-600 transition-colors duration-200
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                @(User.IsFollowing ? "Unfollow" : "Follow")
+            </button>
+        </div>
+
+        <div class="mt-4 md:mt-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900">@User.FullName</h2>
+            <p class="text-gray-500 text-sm md:text-base">@($"@{User.Handle}")</p>
+        </div>
+
+        <p class="mt-4 text-gray-700 leading-relaxed">@User.Bio</p>
+
+        <div class="mt-4 flex flex-wrap items-center text-gray-500 text-sm space-y-2 sm:space-y-0 sm:space-x-4">
+            <div class="flex items-center">
+                <svg class="w-6 h-6 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span>@User.Location</span>
+            </div>
+            <div class="flex items-center">
+                <svg class="w-6 h-6 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Born @User.BirthDate.ToString("MMMM d, yyyy")</span>
+            </div>
+            <div class="flex items-center">
+                <svg class="w-6 h-6 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Joined @User.JoinDate.ToString("MMMM yyyy")</span>
+            </div>
+        </div>
+
+        <div class="mt-6 flex space-x-10 text-gray-700">
+            <a href="/followers">
+                <span class="font-bold text-gray-900">@User.FollowersCount.ToString("N0", CultureInfo.InvariantCulture)</span>
+                <span class="text-gray-500"> Followers</span>
+            </a>
+            <a href="/following">
+                <span class="font-bold text-gray-900">@User.FollowingCount.ToString("N0", CultureInfo.InvariantCulture)</span>
+                <span class="text-gray-500"> Following</span>
+            </a>
+        </div>
+    </div>
+</div>
+

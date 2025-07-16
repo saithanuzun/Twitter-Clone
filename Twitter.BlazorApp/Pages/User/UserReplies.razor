@@ -1,0 +1,158 @@
+@page "/user/{username}/with_replies"
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Pages.Components.User
+
+
+<UserProfile User="UserProfile"></UserProfile>
+
+<div
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
+    <NavLink href="@($"/user/{username}")" class="w-1/2 h-full">
+        <div
+            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
+            <h2 class="font-semibold text-center self-center text-gray-400">Posts</h2>
+        </div>
+    </NavLink>
+
+    <NavLink href="@($"/user/{username}/with_replies")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold self-center">
+                Replies
+            </h2>
+            <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
+
+        </div>
+    </NavLink>
+    <NavLink href="@($"/user/{username}/with_like")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400 ">
+                Likes
+            </h2>
+
+        </div>
+    </NavLink>
+</div>
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+        <!-- POST section -->
+        <div class="flex flex-col">
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- END OF MID PART -->
+
+@code
+{
+    List<TweetViewModel> tweets = new List<TweetViewModel>
+    {
+        new TweetViewModel()
+        {
+            Username = "techpulse_today",
+            ProfileName = "Tech Pulse",
+            Time = "10m",
+            Content = "AI-powered translation just took a leap forward with real-time context learning. The future of language is here. 🧠🌍 #AI #TechNews",
+            ProfilePic = "https://randomuser.me/api/portraits/men/10.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1581090700227-1e8e9023813d", // AI/tech related
+            RepliesCount = 19,
+            RetweetsCount = 43,
+            LikesCount = 178
+        },
+        new TweetViewModel()
+        {
+            Username = "plantparadise",
+            ProfileName = "Leaf & Bloom",
+            Time = "30m",
+            Content = "Can’t get enough of this Monstera growth! 🌿 Indoor plants really do lift the mood. #PlantLover #UrbanJungle",
+            ProfilePic = "https://randomuser.me/api/portraits/women/11.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1587300003388-59208cc962cb", // Plant photo
+            RepliesCount = 7,
+            RetweetsCount = 22,
+            LikesCount = 134
+        },
+        new TweetViewModel()
+        {
+            Username = "financetipsdaily",
+            ProfileName = "Money Matters",
+            Time = "1h",
+            Content = "5 ways to recession-proof your finances before the end of the year. 🧾💡 #FinanceTips #MoneyTalk",
+            ProfilePic = "https://randomuser.me/api/portraits/men/12.jpg",
+            MediaUrl = "", // Text-only finance tip
+            RepliesCount = 11,
+            RetweetsCount = 35,
+            LikesCount = 120
+        },
+        new TweetViewModel()
+        {
+            Username = "sketchbookmagic",
+            ProfileName = "Art by Lila",
+            Time = "2h",
+            Content = "Just finished this watercolour landscape. Something peaceful about painting with no music and just nature sounds. 🎨✨ #ArtistOnTwitter",
+            ProfilePic = "https://randomuser.me/api/portraits/women/13.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1529070538774-1843cb3265df", // Art sketch
+            RepliesCount = 20,
+            RetweetsCount = 52,
+            LikesCount = 245
+        },
+        new TweetViewModel()
+        {
+            Username = "mindfulminute",
+            ProfileName = "Mindful Minute",
+            Time = "5m",
+            Content = "Take a deep breath. Inhale calm, exhale stress. 🌬️ A gentle reminder to pause today. #Mindfulness #MentalHealth",
+            ProfilePic = "https://randomuser.me/api/portraits/men/14.jpg",
+            MediaUrl = "",
+            RepliesCount = 4,
+            RetweetsCount = 12,
+            LikesCount = 89
+        }
+    };
+
+
+}
+
+;
+
+}
+
+@code {
+
+    [Parameter]
+    public string username { get; set; }
+
+    [Inject]
+    IUserService _UserService { get; set; }
+
+    private UserProfileViewModel UserProfile = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var user = await _UserService.GetUserDetails(username);
+
+        UserProfile = new()
+        {
+            FullName = user.FirstName + user.LastName,
+            Handle = user.Username,
+            Bio = user.Bio,
+            BannerImageUrl = user.ImageUrl,
+            ProfileImageUrl = user.ImageUrl,
+            Location = user.Location,
+            BirthDate = user.CreatedDate,
+            JoinDate = user.CreatedDate,
+            FollowersCount = 12500,
+            FollowingCount = 789,
+            IsFollowing = false
+        };
+
+        await base.OnParametersSetAsync();
+    }
+
+}

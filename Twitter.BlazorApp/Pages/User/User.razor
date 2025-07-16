@@ -1,0 +1,151 @@
+@page "/user/{username}"
+
+@layout MainLayout
+
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Pages.Components.User
+
+
+<UserProfile User="UserProfile"></UserProfile>
+
+<div
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
+    <NavLink href="@($"/user/{username}")" class="w-1/2 h-full">
+        <div
+            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
+            <h2 class="font-semibold">Posts</h2>
+            <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
+        </div>
+    </NavLink>
+
+    <NavLink href="@($"/user/{username}/with_replies")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400">
+                Replies
+            </h2>
+        </div>
+    </NavLink>
+    <NavLink href="@($"/user/{username}/with_likes")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400">
+                Likes
+            </h2>
+        </div>
+    </NavLink>
+</div>
+
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+        <!-- POST section -->
+        <div class="flex flex-col">
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- END OF MID PART -->
+
+@code {
+    [Parameter]
+    public string username { get; set; }
+    
+    [Inject]
+    IUserService _UserService { get; set; }
+
+    private UserProfileViewModel UserProfile = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var user = await _UserService.GetUserDetails(username);
+        
+        UserProfile = new()
+        {
+            FullName = user.FirstName + user.LastName,
+            Handle = user.Username,
+            Bio = user.Bio,
+            BannerImageUrl = user.ImageUrl,
+            ProfileImageUrl = user.ImageUrl,
+            Location = user.Location,
+            BirthDate = user.CreatedDate,
+            JoinDate = user.CreatedDate,
+            FollowersCount = 12500,
+            FollowingCount = 789,
+            IsFollowing = false
+        };
+
+        await base.OnParametersSetAsync();
+    }
+    
+     List<TweetViewModel> tweets = new List<TweetViewModel>
+    {
+        new TweetViewModel()
+        {
+            Username = "globalnews_hub",
+            ProfileName = "Global News Hub",
+            Time = "1h",
+            Content = "Breaking: International summit concludes with agreements on climate action. Leaders optimistic about the future. #ClimateAction #GlobalSummit",
+            ProfilePic = "https://randomuser.me/api/portraits/men/4.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1517048676732-d65bc937f952", // Example image for news
+            RepliesCount = 25,
+            RetweetsCount = 78,
+            LikesCount = 310
+        },
+        new TweetViewModel()
+        {
+            Username = "foodieadventures",
+            ProfileName = "Culinary Explorer",
+            Time = "45m",
+            Content = "Just devoured the most amazing truffle pasta at 'The Gilded Spoon'! Highly recommend! 🍝 #foodie #pastalover",
+            ProfilePic = "https://randomuser.me/api/portraits/women/5.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1555939594-58d7adab639f", // Example food image
+            RepliesCount = 8,
+            RetweetsCount = 15,
+            LikesCount = 92
+        },
+        new TweetViewModel()
+        {
+            Username = "dev_insights",
+            ProfileName = "Code Whisperer",
+            Time = "2h",
+            Content = "Exploring the new features in C# 12. Pattern matching improvements are a game-changer! #csharp #programming",
+            ProfilePic = "https://randomuser.me/api/portraits/men/6.jpg",
+            MediaUrl = "", // No media for this tweet
+            RepliesCount = 12,
+            RetweetsCount = 30,
+            LikesCount = 150
+        },
+        new TweetViewModel()
+        {
+            Username = "travelbugsarah",
+            ProfileName = "Sarah's Journeys",
+            Time = "5h",
+            Content = "Sunrise over the Cliffs of Moher was breathtaking today! Ireland is truly magical. 🇮🇪 #travel #ireland",
+            ProfilePic = "https://randomuser.me/api/portraits/women/7.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1516026672288-bac67388709e", // Example travel image
+            RepliesCount = 15,
+            RetweetsCount = 40,
+            LikesCount = 200
+        },
+        new TweetViewModel()
+        {
+            Username = "dailyquotes",
+            ProfileName = "Inspiration Daily",
+            Time = "15m",
+            Content = "Believe you can and you're halfway there. - Theodore Roosevelt #motivation #inspiration",
+            ProfilePic = "https://randomuser.me/api/portraits/men/8.jpg",
+            MediaUrl = "",
+            RepliesCount = 3,
+            RetweetsCount = 10,
+            LikesCount = 75
+        }
+    };
+
+}
+

@@ -1,0 +1,115 @@
+@page "/user/{username}/with_like"
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Pages.Components.User
+
+
+<UserProfile User="UserProfile"></UserProfile>
+
+<div
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
+    <NavLink href="@($"/user/{username}")" class="w-1/2 h-full">
+        <div
+            class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
+            <h2 class="font-semibold text-center self-center text-gray-400">Posts</h2>
+        </div>
+    </NavLink>
+
+    <NavLink href="@($"/user/{username}/with_replies")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold text-center self-center text-gray-400">
+                Replies
+            </h2>
+        </div>
+    </NavLink>
+    <NavLink href="@($"/user/{username}/with_likes")" class="w-1/2 h-full">
+        <div
+            class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold self-center">
+                Likes
+            </h2>
+            <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
+
+        </div>
+    </NavLink>
+</div>
+
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+        <!-- POST section -->
+        <div class="flex flex-col">
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- END OF MID PART -->
+
+@code
+{
+    List<TweetViewModel> tweets = new List<TweetViewModel>
+    {
+        new TweetViewModel()
+        {
+            Username = "spacewatcher",
+            ProfileName = "Cosmic Observer",
+            Time = "25m",
+            Content = "NASA’s new telescope captures the clearest image yet of a distant exoplanet. Mind-blowing detail! 🪐✨ #Space #Astronomy",
+            ProfilePic = "https://randomuser.me/api/portraits/men/21.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1604079628043-9433b6b04b20", // Space image
+            RepliesCount = 18,
+            RetweetsCount = 55,
+            LikesCount = 240
+        },
+        new TweetViewModel()
+        {
+            Username = "fitwithjane",
+            ProfileName = "Jane’s Fitness Journey",
+            Time = "50m",
+            Content = "Just finished a 5K run and feeling amazing! Progress isn't always linear, but it's always worth it. 🏃‍♀️💪 #FitnessMotivation #RunLife",
+            ProfilePic = "https://randomuser.me/api/portraits/women/22.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1571019613914-85f342c1d4d2", // Running/fitness image
+            RepliesCount = 6,
+            RetweetsCount = 17,
+            LikesCount = 110
+        }
+    };
+
+}
+
+@code {
+    [Parameter]
+    public string username { get; set; }
+    
+    [Inject]
+    IUserService _UserService { get; set; }
+
+    private UserProfileViewModel UserProfile = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var user = await _UserService.GetUserDetails(username);
+        
+        UserProfile = new()
+        {
+            FullName = user.FirstName + user.LastName,
+            Handle = user.Username,
+            Bio = user.Bio,
+            BannerImageUrl = user.ImageUrl,
+            ProfileImageUrl = user.ImageUrl,
+            Location = user.Location,
+            BirthDate = user.CreatedDate,
+            JoinDate = user.CreatedDate,
+            FollowersCount = 12500,
+            FollowingCount = 789,
+            IsFollowing = false
+        };
+
+        await base.OnParametersSetAsync();
+    }
+}

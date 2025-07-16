@@ -1,0 +1,82 @@
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+
+@page "/feed/following"
+
+
+<!-- navbar -->
+<div
+    class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
+    <NavLink href="/feed/for-you" class="w-1/2 h-full">
+        <div class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
+            <h2 class="font-semibold text-center self-center text-gray-400">For You</h2>
+        </div>
+    </NavLink>
+
+    <NavLink href="/feed/following" class="w-1/2 h-full">
+        <div class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
+            <h2 class="font-semibold self-center">Following</h2>
+            <div class="w-14 h-1 bg-sky-600 bottom-0 absolute rounded-lg"></div>
+        </div>
+    </NavLink>
+</div>
+<!-- end of navbar -->
+
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+        <!-- POST section -->
+        <div class="flex flex-col">
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- END OF MID PART -->
+
+@code
+{
+    List<TweetViewModel> tweets = new List<TweetViewModel>
+    {
+        new TweetViewModel()
+        {
+            Username = "wanderlust",
+            ProfileName = "Emily Rivera",
+            Time = "1h",
+            Content = "Exploring the Swiss Alps today 🏔️✨ Can’t believe this view. #travel #nature",
+            ProfilePic = "https://randomuser.me/api/portraits/women/12.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1600488991426-7c3b2875c30d",
+            RepliesCount = 4,
+            RetweetsCount = 6,
+            LikesCount = 37
+        },
+        new TweetViewModel()
+        {
+            Username = "devdaily",
+            ProfileName = "Code Smith",
+            Time = "5m",
+            Content = "Just shipped a new Blazor component library 🚀🔥 Check it out on GitHub! #dotnet #blazor",
+            ProfilePic = "https://randomuser.me/api/portraits/men/9.jpg",
+            MediaUrl = "",
+            RepliesCount = 3,
+            RetweetsCount = 11,
+            LikesCount = 54
+        },
+        new TweetViewModel()
+        {
+            Username = "bookworm89",
+            ProfileName = "Lena West",
+            Time = "20m",
+            Content = "Finished reading 'Project Hail Mary' and my mind is blown 🤯💫 #scifi #bookreview",
+            ProfilePic = "https://randomuser.me/api/portraits/women/5.jpg",
+            MediaUrl = "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4",
+            RepliesCount = 6,
+            RetweetsCount = 9,
+            LikesCount = 42
+        }
+    };
+
+}

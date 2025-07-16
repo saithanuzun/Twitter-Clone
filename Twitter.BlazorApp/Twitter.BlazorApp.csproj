@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Layout\NavMenu.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Counter.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Home.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Weather.razor" />
+      <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Layout\EmptyLayout.razor" />
+      <AdditionalFiles Include="Layout\LeftSideBar.razor" />
+      <AdditionalFiles Include="Layout\MainLayout.razor" />
+      <AdditionalFiles Include="Layout\RightSidebar.razor" />
+      <AdditionalFiles Include="Pages\Components\Hashtags.razor" />
+      <AdditionalFiles Include="Pages\Components\SearchBar.razor" />
+      <AdditionalFiles Include="Pages\Components\TweetCard.razor" />
+      <AdditionalFiles Include="Pages\Components\User\UserProfile.razor" />
+      <AdditionalFiles Include="Pages\Components\Who_to_follow.razor" />
+      <AdditionalFiles Include="Pages\Explore\Explore.razor" />
+      <AdditionalFiles Include="Pages\Home\FollowingFeed.razor" />
+      <AdditionalFiles Include="Pages\Home\Hashtags.razor" />
+      <AdditionalFiles Include="Pages\Home\HashtagTweets.razor" />
+      <AdditionalFiles Include="Pages\Home\Home.razor" />
+      <AdditionalFiles Include="Pages\Home\Settings.razor" />
+      <AdditionalFiles Include="Pages\Login\Login.razor" />
+      <AdditionalFiles Include="Pages\Login\Sign-Up.razor" />
+      <AdditionalFiles Include="Pages\User\UpdateUser.razor" />
+      <AdditionalFiles Include="Pages\User\User.razor" />
+      <AdditionalFiles Include="Pages\User\UserFollowers.razor" />
+      <AdditionalFiles Include="Pages\User\UserFollowing.razor" />
+      <AdditionalFiles Include="Pages\User\UserLikes.razor" />
+      <AdditionalFiles Include="Pages\User\UserReplies.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages\Tweet" />
+    </ItemGroup>
+
+</Project>
