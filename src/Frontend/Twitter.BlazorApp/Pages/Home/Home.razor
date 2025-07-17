@@ -1,5 +1,6 @@
 ﻿@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
 @using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
 
 @page "/"
 @page "/feed/for-you"
@@ -44,51 +45,47 @@
     </section>
 </div>
 
+
 <!-- END OF MID PART -->
 
 @code
 {
-    List<TweetViewModel> tweets = new List<TweetViewModel>
+    public async Task OnPageChanged(int pageNumber)
     {
-        new TweetViewModel()
+        
+    }
+    
+    [Inject]
+    ITweetService _TweetService { get; set; }
+    
+    List<TweetViewModel> tweets = new();
+
+    public int TotalPage { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var dvo = await _TweetService.GetMainPageTweets(1, 10);
+
+        var tweetModels = dvo.Results.Select(item => new TweetViewModel
         {
-            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
-            Username = "johndoe",
-            ProfileName = "John Doe",
-            Time = "2h",
-            Content = "Just finished a great run in the park! #fitness",
-            ProfilePic = "https://randomuser.me/api/portraits/men/1.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            RepliesCount = 5,
-            RetweetsCount = 12,
-            LikesCount = 45
-        },
-        new TweetViewModel()
-        {
-            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
-            Username = "janedoe",
-            ProfileName = "Jane Doe",
-            Time = "30m",
-            Content = "Loving the new coffee shop downtown ☕️ #coffeetime",
-            ProfilePic = "https://randomuser.me/api/portraits/women/2.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1525059337994-8e7d6bb0f01f",
-            RepliesCount = 2,
-            RetweetsCount = 3,
-            LikesCount = 18
-        },
-        new TweetViewModel()
-        {
-            Id = "16b3a932-a4e6-4a61-a666-4ca15835df21",
-            Username = "techguru",
-            ProfileName = "Tech Guru",
-            Time = "10m",
-            Content = "Excited about the upcoming AI conference next week! 🤖 #AI2025",
-            ProfilePic = "https://randomuser.me/api/portraits/men/3.jpg",
-            MediaUrl = "",
-            RepliesCount = 10,
-            RetweetsCount = 8,
-            LikesCount = 60
-        }
-    };
+            Id = item.Id,
+            Content = item.Content,
+            MediaUrl = item.MediaUrl,
+            LikesCount = item.LikeCount,
+            ProfileName = item.UserDisplayName,
+            ProfilePic = item.UserProfilePic,
+            RepliesCount = item.RepliesCount,
+            RetweetsCount = item.RetweetCount,
+            Time = item.CreatedDate.ToString("g"),
+            Username = item.UserUsername,
+        });
+
+        tweets.AddRange(tweetModels);
+
+        await base.OnParametersSetAsync();
+    }
+
+
 
 }

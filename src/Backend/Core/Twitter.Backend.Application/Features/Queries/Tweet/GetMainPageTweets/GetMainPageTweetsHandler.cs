@@ -8,11 +8,16 @@ namespace Twitter.Backend.Application.Features.Queries.Tweet.GetMainPageTweets;
 public class
     GetMainPageTweetsHandler : IRequestHandler<GetMainPageTweetsRequest, PaginationResponse<GetMainPageTweetsResponse>>
 {
-    private ITweetRepository _tweetRepository;
+    private readonly ITweetRepository _tweetRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly ITweetLikeRepository _tweetLikeRepository;
+    
 
-    public GetMainPageTweetsHandler(ITweetRepository tweetRepository)
+    public GetMainPageTweetsHandler(ITweetRepository tweetRepository, ITweetLikeRepository tweetLikeRepository, IUserRepository userRepository)
     {
         _tweetRepository = tweetRepository;
+        _tweetLikeRepository = tweetLikeRepository;
+        _userRepository = userRepository;
     }
     
     // TODO: Implement the main page tweet functionality.
@@ -32,7 +37,13 @@ public class
             ParentTweetId = i.ParentTweetId,
             UserId = i.UserId,
             IsRetweet = i.IsRetweet,
-            RetweetParentId = i.RetweetParentId
+            RetweetParentId = i.RetweetParentId,
+            UserUsername = i.User.Username,
+            UserDisplayName = i.User.Profile.DisplayName,
+            UserProfilePic = i.User.Profile.ImageUrl,
+            LikeCount = i.TweetLikes.Count,
+            RepliesCount = i.Replies.Count,
+            RetweetCount = i.Retweets.Count,    
         });
 
         return  list.GetPaged(request.PageSize, request.Page);

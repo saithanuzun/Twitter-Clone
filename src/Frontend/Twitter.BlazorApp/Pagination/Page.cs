@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Twitter.BlazorApp.Pagination;
 
 public class Page
@@ -32,13 +34,20 @@ public class Page
         PageSize = pageSize;
     }
 
+    [JsonPropertyName("currentPage")]
     public int CurrentPage { get; set; }
+    
 
+    [JsonPropertyName("pageSize")]
     public int PageSize { get; set; }
+    
 
+    [JsonPropertyName("totalRowCount")]
     public int TotalRowCount { get; set; }
 
+    [JsonPropertyName("totalPageCount")]
     public int TotalPageCount => (int)Math.Ceiling((double)TotalRowCount / PageSize);
 
+    [JsonPropertyName("skip")]
     public int Skip => (CurrentPage - 1) * PageSize;
 }

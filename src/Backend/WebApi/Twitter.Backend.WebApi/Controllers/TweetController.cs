@@ -65,7 +65,7 @@ public class TweetController : BaseController
     {
         var response = await _mediator.Send(new GetMainPageTweetsRequest()
         {
-            UserId = UserId.Value,
+            //UserId = UserId.Value,
             Page = page,
             PageSize = pageSize
         });

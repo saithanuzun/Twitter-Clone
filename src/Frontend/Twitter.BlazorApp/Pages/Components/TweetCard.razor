@@ -8,23 +8,29 @@
 
 }
 
-<a href="@($"/tweet/{tweet.Id}")" class="text-gray-800 no-underline hover:text-gray-800 hover:underline-0 cursor-pointer">
-    <div class="hover:bg-black/10 dark:hover:bg-white/[0.03] cursor-pointer transition ease-in-out py-3 w-full flex flex-col gap-2 p-3 border-gray-500/40 border-b-[0.1px]">
-        <div class="flex px-2 items-start gap-4">
-            <div class="w-10 h-10">
-                <img src="@tweet.ProfilePic" alt="" class="object-cover rounded-full"/>
+<div class="hover:bg-black/10 dark:hover:bg-white/[0.03] cursor-pointer transition ease-in-out py-3 w-full flex flex-col gap-2 p-3 border-gray-500/40 border-b-[0.1px]">
+    <div class="flex px-2 items-start gap-4">
+        <a href="@($"/user/{tweet.Username}")">
+
+            <div class="w-14 h-14">
+                <img src="@tweet.ProfilePic" alt="@($"/user/{tweet.Username}/profile_pic")" class="w-full h-full object-cover rounded-full"/>
             </div>
-            <div class="flex flex-col">
-                <div class="flex gap-1">
-                    <div class="font-semibold flex gap-3 items-center">
+        </a>
+        <div class="flex flex-col">
+            <div class="flex gap-1">
+                <div class="font-semibold flex gap-3 items-center">
+                    <a href="@($"/user/{tweet.Username}")">
                         <h2>@tweet.ProfileName</h2>
-                    </div>
-                    <p class="opacity-50">@($"@{tweet.Username}")</p>
-                    <p class="opacity-50">· @tweet.Time</p>
+                    </a>
                 </div>
-                <p>@tweet.Content</p>
+                <p class="opacity-50">@($"@{tweet.Username}")</p>
+                <p class="opacity-50">· @tweet.Time</p>
             </div>
+            <p>@tweet.Content</p>
         </div>
+    </div>
+
+    <a href="@($"/tweet/{tweet.Id}")" class="text-gray-800 no-underline hover:text-gray-800 hover:underline-0 cursor-pointer">
 
         <div class="p-3 self-center sm:w-[85%] h-auto">
             <img src="@tweet.MediaUrl" alt="" class="object-cover rounded-2xl max-w-[100%] h-auto"/>
@@ -49,8 +55,9 @@
                 <span>@tweet.LikesCount</span>
             </button>
         </div>
-    </div>
-</a>
+    </a>
+
+</div>
 
 @code {
 
