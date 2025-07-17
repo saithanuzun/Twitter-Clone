@@ -10,7 +10,10 @@ public interface ITweetService
     Task<TweetDvo> GetTweet(string tweetId);
     Task<PagedViewModel<TweetDvo>> GetMainPageTweets(int page, int pageSize);
     Task<PagedViewModel<TweetDvo>> GetUserTweets(int page, int pageSize, string userName = null);
-    Task<PagedViewModel<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize);
+    Task<List<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize);
+    
+    Task<TweetLikeDvo> GetTweetLikes(string tweetId);
+
     Task<Guid> CreateTweet(CreateTweetDto command);
     
     Task<List<Guid>> GetHashtagTweets(string tag);

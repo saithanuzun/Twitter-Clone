@@ -1,6 +1,9 @@
 @using Twitter.BlazorApp.Infrastructure.Models.Dvos
 @using Twitter.BlazorApp.Infrastructure.Models.ViewModels
 
+@inject NavigationManager Navigation
+
+
 @code {
 
     [Parameter]
@@ -26,36 +29,53 @@
                 <p class="opacity-50">@($"@{tweet.Username}")</p>
                 <p class="opacity-50">· @tweet.Time</p>
             </div>
-            <p>@tweet.Content</p>
+            <a href="@($"/tweet/{tweet.Id}")" class="text-gray-800 no-underline hover:text-gray-800 hover:underline-0 cursor-pointer">
+
+                <p>@tweet.Content</p>
+            </a>
         </div>
     </div>
 
-    <a href="@($"/tweet/{tweet.Id}")" class="text-gray-800 no-underline hover:text-gray-800 hover:underline-0 cursor-pointer">
 
-        <div class="p-3 self-center sm:w-[85%] h-auto">
-            <img src="@tweet.MediaUrl" alt="" class="object-cover rounded-2xl max-w-[100%] h-auto"/>
-        </div>
+    <div class="p-3 self-center sm:w-[85%] h-auto">
+        <img src="@tweet.MediaUrl" alt="" class="object-cover rounded-2xl max-w-[100%] h-auto"/>
+    </div>
 
 
-        <div class="flex justify-between sm:w-[80%] w-[95%] self-center text-gray-600 text-sm mt-2">
+    <div class="flex justify-between sm:w-[80%] w-[95%] self-center text-gray-600 text-sm mt-2">
 
-            <!-- Replies Button -->
-            <button @onclick="ShowReplies" class="flex items-center gap-1 hover:text-blue-500 transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2H7l-5 4V5z"/>
-                </svg>
-                <span>@tweet.RepliesCount</span>
-            </button>
+        <!-- Replies Button -->
+        <button @onclick="ShowReplies" class="flex items-center gap-1 hover:text-blue-500 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 20 20">
+                <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2H7l-5 4V5z"/>
+            </svg>
+            <span>@tweet.RepliesCount</span>
+        </button>
 
-            <!-- Like Button -->
-            <button @onclick="ToggleLike" class="flex items-center gap-1 hover:text-red-500 transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-red-500" viewBox="0 0 20 20">
-                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z"/>
-                </svg>
-                <span>@tweet.LikesCount</span>
-            </button>
-        </div>
-    </a>
+        <!-- Retweet Button -->
+        <button @onclick="ToggleRetweet" class="flex items-center gap-1 hover:text-green-500 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current text-green-500" viewBox="0 0 20 20">
+                <path d="M7 7v6h4l-5 5-5-5h4V7h2zM13 13V7h-4l5-5 5 5h-4v6h-2z"/>
+            </svg>
+            <span>@tweet.RetweetsCount</span>
+        </button>
+
+        <!-- Like Button -->
+        <button @onclick="ToggleLike" class="flex items-center gap-1 hover:text-red-500 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current text-red-500" viewBox="0 0 20 20">
+                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z"/>
+            </svg>
+            <span>@tweet.LikesCount</span>
+        </button>
+
+        <!-- Users Who Liked Button -->
+        <button @onclick="ShowLikedUsers" class="flex items-center gap-1 hover:text-blue-500 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current text-blue-500" viewBox="0 0 20 20">
+                <path d="M10 2a5 5 0 00-5 5c0 1.657 1.567 3.667 5 6.5 3.433-2.833 5-4.843 5-6.5a5 5 0 00-5-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/>
+            </svg>
+            <span>Liked by Users</span>
+        </button>
+    </div>
 
 </div>
 
@@ -74,5 +94,19 @@
         tweet.LikesCount++;
         StateHasChanged();
     }
+
+    private void ShowLikedUsers()
+    {
+        Navigation.NavigateTo("/tweet/" + tweet.Id + "/likes");
+    }
+
+    private void ToggleRetweet()
+    {
+    // Call API or change state
+    // Console.WriteLine($"Liked tweet {tweet.Id}");
+    //tweet.LikesCount++;
+    //StateHasChanged();
+    }
+
 
 }

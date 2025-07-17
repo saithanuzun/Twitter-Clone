@@ -93,7 +93,7 @@
     {
         var userFollowers = await _UserService.GetUserFollowings(username);
 
-        foreach (var item in userFollowers.FollowingUserIds)
+        foreach (var item in userFollowers.userFollowingIds)
         {
             var user = await _UserService.GetUserDetails(Guid.Parse(item));
 

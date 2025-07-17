@@ -64,9 +64,10 @@ public class GetRepliesHandler : IRequestHandler<GetRepliesRequest,List<GetRepli
                 RepliesCount = repliesCount,
 
                 UserUsername = user.Username, 
-                UserProfilePic = user.Profile.ImageUrl , 
+                UserProfilePic = user.Profile.ImageUrl, 
                 UserDisplayName = user.Profile.DisplayName, 
             };
+            
             result.Add(item);
         }
         

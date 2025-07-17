@@ -1,0 +1,79 @@
+@page "/tweet/{id}/likes"
+
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Infrastructure.Models.Dvos
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+
+<div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+    <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200" onclick="history.back()">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 text-gray-700 dark:text-gray-300">
+            <g>
+                <path d="M7.414 12L12.707 6.707 11.293 5.293 4.586 12l6.707 6.707 1.414-1.414L7.414 12z"></path>
+            </g>
+        </svg>
+    </button>
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white flex-grow text-center">Liked By Users</h2>
+    <div class="w-8"></div>
+</div>
+
+
+@if (_users == null)
+{
+    <p class="p-4 text-gray-600 dark:text-gray-300">Loading...</p>
+}
+else
+{
+    @foreach (var item in _users)
+    {
+        <div class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+            <div class="flex items-center space-x-3">
+                <img class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md object-cover" src="@item.ProfileImageUrl" alt="User Avatar">
+                <div>
+                    <p class="text-gray-900 dark:text-white font-semibold">@item.FullName</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">@@@item.Handle</p>
+                    <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                        @item.Bio
+                    </p>
+                </div>
+            </div>
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200">
+                Following
+            </button>
+        </div>
+    }
+}
+
+
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    [Inject]
+    public ITweetService _tweetService { get; set; }
+
+    [Inject]
+    public IUserService _UserService { get; set; }
+
+    public List<UserProfileViewModel> _users { get; set; } = new(); // <-- Initialize it here!
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var dvo = await _tweetService.GetTweetLikes(id);
+
+        foreach (var item in dvo.UserIds)
+        {
+            var user = await _UserService.GetUserDetails(item);
+
+            _users.Add(new UserProfileViewModel()
+            {
+                ProfileImageUrl = user.ImageUrl,
+                Handle = user.Username,
+                FullName = user.DisplayName,
+                Bio = user.Bio,
+            });
+        }
+    }
+
+}

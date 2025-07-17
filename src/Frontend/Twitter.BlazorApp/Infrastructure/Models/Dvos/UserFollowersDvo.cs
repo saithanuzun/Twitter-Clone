@@ -5,11 +5,10 @@ namespace Twitter.BlazorApp.Infrastructure.Models.Dvos;
 public class UserFollowersDvo
 {
     [JsonPropertyName("followingUserIds")]
-    public List<string> FollowingUserIds { get; set; }
-    
-    
+    public List<string>? FollowingUserIds { get; set; }
+
     [JsonPropertyName("usernames")]
-    public List<string> Usernames { get; set; }
+    public List<string>? Usernames { get; set; }
     
     [JsonPropertyName("followersCount")]
     public int FollowersCount { get; set; }
@@ -18,5 +17,5 @@ public class UserFollowersDvo
     public string? Username { get; set; }
     
     [JsonPropertyName("userId")]
-    public Guid UserId { get; set; }
+    public Guid? UserId { get; set; }
 }

@@ -58,9 +58,28 @@ public class TweetService : ITweetService
         throw new NotImplementedException();
     }
 
-    public async Task<PagedViewModel<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize)
+    public async Task<List<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"/api/tweet/{tweetId}/replies");
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var dvo = JsonSerializer.Deserialize<List<TweetDvo>>(json);
+
+        return dvo;
+    }
+
+    public async Task<TweetLikeDvo> GetTweetLikes(string tweetId)
+    {
+        var response = await _client.GetAsync($"/api/tweet/{tweetId}/likes");
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var dvo = JsonSerializer.Deserialize<TweetLikeDvo>(json);
+
+        return dvo;
     }
 
     public Task<Guid> CreateTweet(CreateTweetDto command)
