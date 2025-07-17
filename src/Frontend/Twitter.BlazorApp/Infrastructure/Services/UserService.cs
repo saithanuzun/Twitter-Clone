@@ -35,6 +35,28 @@ public class UserService : IUserService
         return result;
     }
 
+    public async Task<UserFollowersDvo> GetUserFollowers(string userName)
+    {
+        var response = await _client.GetAsync($"/api/user/{userName}/followers");
+        
+        var json = await response.Content.ReadAsStringAsync();
+        
+        var result = JsonSerializer.Deserialize<UserFollowersDvo>(json);
+        
+        return result;
+    }
+
+    public async Task<UserFollowingDvo> GetUserFollowings(string userName)
+    {
+        var response = await _client.GetAsync($"/api/user/{userName}/following");
+        
+        var json = await response.Content.ReadAsStringAsync();
+        
+        var result = JsonSerializer.Deserialize<UserFollowingDvo>(json);
+        
+        return result;
+    }
+
     public Task<bool> UpdateUser(UserDetailsDvo user)
     {
         throw new NotImplementedException();

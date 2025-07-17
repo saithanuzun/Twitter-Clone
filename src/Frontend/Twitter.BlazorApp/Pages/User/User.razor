@@ -64,6 +64,9 @@
     protected override async Task OnParametersSetAsync()
     {
         var user = await _UserService.GetUserDetails(username);
+        var userFollowers = await _UserService.GetUserFollowers(username);
+        var userFollowing = await _UserService.GetUserFollowings(username);
+
         
         UserProfile = new()
         {
@@ -75,8 +78,8 @@
             Location = user.Location,
             BirthDate = user.CreatedDate,
             JoinDate = user.CreatedDate,
-            FollowersCount = 12500,
-            FollowingCount = 789,
+            FollowersCount = userFollowers.FollowersCount,
+            FollowingCount = userFollowing.FollowersCount,
             IsFollowing = false
         };
 

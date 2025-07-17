@@ -43,9 +43,10 @@ public class TweetService : ITweetService
         throw new NotImplementedException();
     }
 
-    public Task<PagedViewModel<TweetDvo>> GetTweetReplies(Guid entryId, int page, int pageSize)
+    public async Task<PagedViewModel<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize)
     {
         throw new NotImplementedException();
+
     }
 
     public Task<Guid> CreateTweet(CreateTweetDto command)

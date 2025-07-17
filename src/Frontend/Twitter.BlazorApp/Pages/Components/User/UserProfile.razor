@@ -63,11 +63,11 @@
         </div>
 
         <div class="mt-6 flex space-x-10 text-gray-700">
-            <a href="/followers">
+            <a href=@($"/user/{User.Handle}/followers")>
                 <span class="font-bold text-gray-900">@User.FollowersCount.ToString("N0", CultureInfo.InvariantCulture)</span>
                 <span class="text-gray-500"> Followers</span>
             </a>
-            <a href="/following">
+            <a href=@($"/user/{User.Handle}/following")>
                 <span class="font-bold text-gray-900">@User.FollowingCount.ToString("N0", CultureInfo.InvariantCulture)</span>
                 <span class="text-gray-500"> Following</span>
             </a>

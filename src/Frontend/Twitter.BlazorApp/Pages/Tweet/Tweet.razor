@@ -48,9 +48,32 @@
     </div>
 </div>
 
-<CreateTweetComponent></CreateTweetComponent>
+<!-- what is happening section -->
 
-<TweetCard tweet="tweetViewModel"/>
+<div class="flex flex-row px-6 py-4 items-center gap-4 border-b-gray-500/50 border-b-[0.1px] w-full">
+
+    <!-- Left: Avatar + Input -->
+    <div class="flex gap-4 items-center w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200 cursor-pointer">
+        <img src="./assets/image.png" alt="User Avatar" class="w-12 h-12 rounded-full object-cover"/>
+        <input
+            class="flex-grow text-xl text-gray-500 dark:text-gray-400 bg-transparent outline-none border-none focus:outline-none focus:ring-0 placeholder-gray-400 dark:placeholder-gray-500"
+            placeholder="Post your reply"
+            onclick="event.stopPropagation();"/>
+    </div>
+
+    <!-- Right: Reply Button -->
+    <div class="flex-shrink-0">
+        <button
+            class="dark:bg-[#eff3f4] bg-black rounded-full sm:px-4 px-3 py-1 dark:text-black text-white font-semibold">
+            Reply
+        </button>
+    </div>
+</div>
+
+<!-- end of what is happening section -->
+
+
+<TweetCard tweet="tweetViewModel2"/>
 
 
 @code {
@@ -63,7 +86,21 @@
 
     TweetViewModel tweetViewModel = new TweetViewModel()
     {
-        Id = "sdfsdf",
+        Id = "2e78b5ac-6f36-432a-b4c7-dace48098a3a",
+        Username = "techguru",
+        ProfileName = "Tech Guru",
+        Time = "10m",
+        Content = "Excited about the upcoming AI conference next week! 🤖 #AI2025",
+        ProfilePic = "https://randomuser.me/api/portraits/men/3.jpg",
+        MediaUrl = "",
+        RepliesCount = 10,
+        RetweetsCount = 8,
+        LikesCount = 60
+    };
+    
+    TweetViewModel tweetViewModel2 = new TweetViewModel()
+    {
+        Id = "2e78b5ac-6f36-432a-b4c7-dace48098a3a",
         Username = "techguru",
         ProfileName = "Tech Guru",
         Time = "10m",

@@ -1,4 +1,7 @@
-@page "/following"
+@page "/user/{username}/following"
+
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
 
 
 <div class="flex flex-col min-h-screen ">
@@ -19,14 +22,14 @@
 
             <div
                 class="dark:bg-black/50 bg-white/50 backdrop-blur-[8px] flex h-14 w-full border-gray-500/50 border-b-[0.1px] border-r-[0.1px] sticky top-0 z-20">
-                <NavLink href="/followers" class="w-1/2 h-full">
+                <NavLink href=@($"/user/{username}/followers") class="w-1/2 h-full">
                     <div
                         class="flex flex-col justify-center h-full items-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer relative">
                         <h2 class="font-semibold text-center self-center text-gray-400">Followers</h2>
                     </div>
                 </NavLink>
 
-                <NavLink href="/following" class="w-1/2 h-full">
+                <NavLink href=@($"/user/{username}/following") class="w-1/2 h-full">
                     <div
                         class="w-1/2 h-full flex justify-center hover:bg-black/10 dark:hover:bg-white/[0.09] transition ease-in-out cursor-pointer">
                         <h2 class="font-semibold self-center">
@@ -41,56 +44,68 @@
 
             <div class="divide-y divide-gray-200 dark:divide-gray-700">
 
-                <div class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                    <div class="flex items-center space-x-3">
-                        <img class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md object-cover" src="https://picsum.photos/640/480/?image=290" alt="User Avatar">
-                        <div>
-                            <p class="text-gray-900 dark:text-white font-semibold">John Doe</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">@@johndoe</p>
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">
-                                Passionate developer, tech enthusiast, and lifelong learner.
-                            </p>
-                        </div>
-                    </div>
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200">
-                        Following
-                    </button>
-                </div>
+                @if (_users.Count == 0)
+                {
+                    <p class="text-lg font-medium">Not following anyone</p>
+                    <p class="text-sm text-gray-400 dark:text-gray-500 mt-1">Follow someone to see them listed here.</p>
 
-                <div class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                    <div class="flex items-center space-x-3">
-                        <img class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md object-cover" src="https://picsum.photos/640/480/?image=290" alt="User Avatar">
-                        <div>
-                            <p class="text-gray-900 dark:text-white font-semibold">John Doe</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">@@johndoe</p>
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">
-                                Passionate developer, tech enthusiast, and lifelong learner.
-                            </p>
+                }
+                else
+                {
+                    @foreach (var item in _users)
+                    {
+                        <div class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <div class="flex items-center space-x-3">
+                                <img class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md object-cover" src="@item.ProfileImageUrl" alt="User Avatar">
+                                <div>
+                                    <p class="text-gray-900 dark:text-white font-semibold">@item.FullName</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">@@@item.Handle</p>
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                                        @item.Bio
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200">
+                                Following
+                            </button>
                         </div>
-                    </div>
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200">
-                        Following
-                    </button>
-                </div>
-
-                <div class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                    <div class="flex items-center space-x-3">
-                        <img class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md object-cover" src="https://picsum.photos/640/480/?image=290" alt="User Avatar">
-                        <div>
-                            <p class="text-gray-900 dark:text-white font-semibold">John Doe</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">@@johndoe</p>
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">
-                                Passionate developer, tech enthusiast, and lifelong learner.
-                            </p>
-                        </div>
-                    </div>
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200">
-                        Following
-                    </button>
-                </div>
-
+                    }
+                }
 
             </div>
         </div>
     </div>
 </div>
+
+
+@code
+{
+    [Parameter]
+    public string username { get; set; }
+
+    [Inject]
+    IUserService _UserService { get; set; }
+
+
+    List<UserProfileViewModel> _users = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var userFollowers = await _UserService.GetUserFollowings(username);
+
+        foreach (var item in userFollowers.FollowingUserIds)
+        {
+            var user = await _UserService.GetUserDetails(Guid.Parse(item));
+
+            _users.Add(new UserProfileViewModel()
+            {
+                ProfileImageUrl = user.ImageUrl,
+                Bio = user.Bio,
+                Handle = user.Username,
+                FullName = user.DisplayName,
+            });
+        }
+
+        await base.OnParametersSetAsync();
+    }
+}
