@@ -87,8 +87,15 @@ public class TweetService : ITweetService
         throw new NotImplementedException();
     }
 
-    public Task<List<Guid>> GetHashtagTweets(string tag)
+    public async Task<HashtagTweetDvo> GetHashtagTweets(string tag)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"/api/hashtag/{tag}");
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var dvo = JsonSerializer.Deserialize<HashtagTweetDvo>(json);
+
+        return dvo;
     }
 }

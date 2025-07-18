@@ -4,17 +4,23 @@
     class="w-full border-gray-500/40 border-[0.1px] rounded-3xl flex flex-col mt-4">
     <h1 class="font-bold text-2xl px-4 py-2">What’s happening</h1>
 
-    @foreach (var trend in trendingTopics)
+    @foreach (var trend in trendingTopics.Take(7))
     {
-        <div class="flex p-4 justify-between cursor-pointer hover:bg-black/10 dark:hover:bg-white/5">
-            <div class="flex flex-col">
-                <p class="dark:text-white/50 text-black/80 text-sm">
-                    Trending in UK
-                </p>
-                <p class="font-bold">@trend</p>
+        <a href="@($"/hashtag/{trend.Key.TrimStart('#')}")">
+            <div class="flex p-4 justify-between cursor-pointer hover:bg-black/10 dark:hover:bg-white/5">
+                <div class="flex flex-col">
+                    <p class="dark:text-white/50 text-black/80 text-sm">
+                        Trending in UK
+                    </p>
+                    <p class="font-bold">@trend.Key</p>
+                </div>
+
+                <div class="flex flex-col items-end justify-between">
+                    <i class="fa-solid fa-ellipsis self-center"></i>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-white mt-2">@trend.Value Tweets</p>
+                </div>
             </div>
-            <i class="fa-solid fa-ellipsis self-center"></i>
-        </div>
+        </a>
     }
 </div>
 <!-- end of whats's happening -->
@@ -22,21 +28,19 @@
 
 @code {
 
-    private List<string> trendingTopics = new();
+    private Dictionary<string, int> trendingTopics = new();
 
-    
-   
 
     [Inject]
     IHashtagService _HashtagService { get; set; }
-    
+
 
     protected override async Task OnInitializedAsync()
     {
-        var result= await _HashtagService.GetHashtags();
-        
-        trendingTopics = result.Hashtags.Take(7).ToList();
-        
+        var result = await _HashtagService.GetHashtags();
+
+        trendingTopics = result.Hashtags;
+
         await base.OnInitializedAsync();
     }
 

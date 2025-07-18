@@ -16,7 +16,7 @@ public interface ITweetService
 
     Task<Guid> CreateTweet(CreateTweetDto command);
     
-    Task<List<Guid>> GetHashtagTweets(string tag);
+    Task<HashtagTweetDvo> GetHashtagTweets(string tag);
 
     //Task<List<SearchEntryDvo>> SearchBySubject(string searchText);
 

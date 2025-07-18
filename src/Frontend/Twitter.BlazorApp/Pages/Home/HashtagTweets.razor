@@ -1,2 +1,80 @@
 @page "/hashtag/{tag}"
 
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+
+<!-- whats's happening -->
+<div
+    class="w-full border-gray-500/40 border-[0.1px] flex flex-col mt-4">
+    <h1 class="font-bold text-2xl px-4 py-2">What’s happening</h1>
+
+
+    <div class="flex p-4 justify-between cursor-pointer hover:bg-black/10 dark:hover:bg-white/5">
+        <div class="flex flex-col">
+            <p class="dark:text-white/50 text-black/80 text-sm">
+                Trending in UK
+            </p>
+            <p class="font-bold">#@tag</p>
+        </div>
+        <i class="fa-solid fa-ellipsis self-center"></i>
+    </div>
+
+</div>
+<!-- end of whats's happening -->
+<!-- MID PART -->
+<div class="flex flex-col w-full items-center">
+    <section class="w-full  border-gray-500/40 border-r-[0.1px] border-l-[0.1px] sm:pb-0 pb-14">
+        <!-- POST section -->
+        <div class="flex flex-col">
+            @foreach (var post in tweets)
+            {
+                <TweetCard tweet="post"></TweetCard>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- END OF MID PART -->
+
+@code
+{
+    [Parameter]
+    public string tag { get; set; }
+    
+    [Inject]
+    ITweetService _tweetService { get; set; }
+
+    List<TweetViewModel> tweets = new();
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        tweets.Clear();
+        var newtag = "%23" + tag;
+        var dvo = await _tweetService.GetHashtagTweets(newtag);
+
+        foreach (var item in dvo.HashtagTweetsIds)
+        {
+            var tweet = await _tweetService.GetTweet(item);
+
+            TweetViewModel model = new()
+            {
+                Id = tweet.Id,
+                Username = tweet.UserUsername,
+                ProfileName = tweet.UserDisplayName,
+                Time = tweet.CreatedDate.ToString("g"),
+                Content = tweet.Content,
+                ProfilePic = tweet.UserProfilePic,
+                MediaUrl = tweet.MediaUrl,
+                RepliesCount = tweet.RepliesCount,
+                RetweetsCount = tweet.RetweetCount,
+                LikesCount = tweet.LikeCount,
+            };
+
+            tweets.Add(model);
+        }
+
+        await base.OnParametersSetAsync();
+    }
+
+}
