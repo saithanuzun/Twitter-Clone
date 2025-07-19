@@ -13,4 +13,6 @@ public class TweetViewModel
     public int RepliesCount { get; set; }
     public int RetweetsCount { get; set; }
     public int LikesCount { get; set; }
+
+    public List<string> Hashtags { get; set; }
 }

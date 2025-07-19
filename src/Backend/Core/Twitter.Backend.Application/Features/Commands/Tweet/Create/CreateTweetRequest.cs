@@ -14,5 +14,5 @@ public class CreateTweetRequest : IRequest<CreateTweetResponse>
     public bool? IsRetweet { get; set; }
     
     public Guid? RetweetParentId { get; set; }
-
+    
 }

@@ -54,4 +54,7 @@ public class TweetDvo
     [JsonPropertyName("userDisplayName")]
     public string UserDisplayName { get; set; }
 
+    [JsonPropertyName("hashtags")]
+    public List<string> Hashtags { get; set; }
+
 }

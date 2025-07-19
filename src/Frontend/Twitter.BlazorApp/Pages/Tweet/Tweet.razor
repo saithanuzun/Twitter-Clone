@@ -130,12 +130,19 @@ else
 
     [Parameter]
     public string id { get; set; }
+    
+    TweetViewModel tweetViewModel = new();
+
+    
+    CreateTweetViewModel _createTweetViewModel = new ()
+    {
+        UserId = Guid.Parse("0572fbf2-f1db-42cf-96e7-d54781bf0880"),
+    };
 
 
     [Inject]
     public ITweetService _tweetService { get; set; }
 
-    TweetViewModel tweetViewModel = new();
 
     List<TweetViewModel> replies = new();
 

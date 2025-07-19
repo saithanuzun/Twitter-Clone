@@ -1,16 +1,26 @@
+@using Twitter.BlazorApp.Infrastructure.Models.ViewModels
+@using Twitter.BlazorApp.Infrastructure.Services.Interfaces
+@using Twitter.BlazorApp.Infrastructure.Models.Dtos
+
+@code {
+
+    [Parameter]
+    public CreateTweetViewModel tweet { get; set; }
+
+}
+
 <!-- what is happening section -->
 
 <div
     class="flex flex-col px-6 py-4 items-center gap-4 border-b-gray-500/50 border-b-[0.1px] ">
-    <a href="/user" class="block w-full">
-        <div class="flex gap-4 items-center w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200 cursor-pointer">
-            <img src="./assets/image.png" alt="User Avatar" class="w-11 h-11 rounded-full object-cover"/>
-            <input
-                class="flex-grow text-xl text-gray-500 dark:text-gray-400 bg-transparent outline-none border-none focus:outline-none focus:ring-0 placeholder-gray-400 dark:placeholder-gray-500"
-                placeholder="What is happening?!"
-                onclick="event.stopPropagation();"/>
-        </div>
-    </a>
+    <div class="flex gap-4 items-center w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200 cursor-pointer">
+        <img src="./assets/image.png" alt="User Avatar" class="w-11 h-11 rounded-full object-cover"/>
+        <input
+            InputText @bind-value="TweetText"
+            class="flex-grow text-xl text-gray-500 dark:text-gray-400 bg-transparent outline-none border-none focus:outline-none focus:ring-0 placeholder-gray-400 dark:placeholder-gray-500"
+            placeholder="What is happening?!"
+            onclick="event.stopPropagation();"/>
+    </div>
 
     <div class="flex justify-between sm:w-[90%] w-full">
         <!-- icons row -->
@@ -109,9 +119,36 @@
         </div>
         <!-- end of icons -->
         <button
+            @onclick="PostTweet"
             class="dark:bg-[#eff3f4] bg-black rounded-full sm:px-4 px-3 py-1 dark:text-black text-white font-semibold">
             Post
         </button>
     </div>
 </div>
 <!-- end of what is happening section -->
+
+@code {
+
+    [Inject]
+    ITweetService _TweetService { get; set; }
+
+
+    private string TweetText { get; set; } = "";
+
+    private async Task PostTweet()
+    {
+        if (!string.IsNullOrWhiteSpace(TweetText))
+        {
+            var result = await _TweetService.CreateTweet(new CreateTweetDto()
+            {
+                Content = TweetText,
+                UserId = tweet.UserId,
+                ParentTweetId = tweet.ParentTweetId,
+                IsRetweet = false,
+                RetweetParentId = null,
+            });
+            TweetText = ""; // Clear input after posting
+        }
+    }
+
+}

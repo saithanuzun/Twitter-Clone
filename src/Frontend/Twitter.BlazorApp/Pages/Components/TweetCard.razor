@@ -33,6 +33,16 @@
 
                 <p>@tweet.Content</p>
             </a>
+
+            @if (tweet.Hashtags != null && tweet.Hashtags.Any())
+            {
+                <div class="flex gap-2 flex-wrap mt-1">
+                    @foreach (var tag in tweet.Hashtags)
+                    {
+                        <a href="@($"/hashtag/{tag.TrimStart('#')}")" class="text-blue-500 hover:underline">@tag</a>
+                    }
+                </div>
+            }
         </div>
     </div>
 

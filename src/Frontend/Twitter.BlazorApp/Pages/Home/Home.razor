@@ -30,7 +30,7 @@
 
 <!-- end of navbar -->
 
-<CreateTweetComponent></CreateTweetComponent>
+<CreateTweetComponent tweet="_createTweetViewModel"></CreateTweetComponent>
 
 <!-- MID PART -->
 <div class="flex flex-col w-full items-center">
@@ -50,6 +50,13 @@
 
 @code
 {
+    CreateTweetViewModel _createTweetViewModel = new ()
+    {
+        UserId = Guid.Parse("0572fbf2-f1db-42cf-96e7-d54781bf0880"),
+        ParentTweetId = null,
+    };
+    
+    
     public async Task OnPageChanged(int pageNumber)
     {
         
@@ -79,6 +86,7 @@
             RetweetsCount = item.RetweetCount,
             Time = item.CreatedDate.ToString("g"),
             Username = item.UserUsername,
+            Hashtags = item.Hashtags,
         });
 
         tweets.AddRange(tweetModels);

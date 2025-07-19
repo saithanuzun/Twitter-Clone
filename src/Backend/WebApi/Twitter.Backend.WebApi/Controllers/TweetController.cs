@@ -31,7 +31,6 @@ public class TweetController : BaseController
     }
     
     [HttpPost]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public async Task<IActionResult> CreateTweet([FromBody] CreateTweetRequest request)
     {
         var response = await _mediator.Send(request);

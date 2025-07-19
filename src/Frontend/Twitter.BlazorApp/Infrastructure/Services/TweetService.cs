@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using System.Text.Json;
 using Twitter.BlazorApp.Infrastructure.Models.Dtos;
 using Twitter.BlazorApp.Infrastructure.Models.Dvos;
@@ -82,9 +83,18 @@ public class TweetService : ITweetService
         return dvo;
     }
 
-    public Task<Guid> CreateTweet(CreateTweetDto command)
+    public async Task<Guid> CreateTweet(CreateTweetDto command)
     {
-        throw new NotImplementedException();
+        var response = await _client.PostAsJsonAsync("api/tweet", command);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            throw new Exception($"API Error: {response.StatusCode} - {error}");
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<CreateTweetResponse>();
+        return result.Id;
     }
 
     public async Task<HashtagTweetDvo> GetHashtagTweets(string tag)
