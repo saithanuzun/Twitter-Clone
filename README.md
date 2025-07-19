@@ -12,6 +12,8 @@
 ## 📸 Application Screenshots
 ![Homepage](screenshots/sc8.png)
 ![Homepage](screenshots/sc3.png)
+![Homepage](screenshots/sc10.png)
+![Homepage](screenshots/sc11.png)
 ![Homepage](screenshots/sc4.png)
 ![Homepage](screenshots/sc5.png)
 ![Homepage](screenshots/sc6.png)
