@@ -4,4 +4,14 @@
 
 @code {
     
+    [Parameter]
+    public string searchItem { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+        
+        
+        return base.OnParametersSetAsync();
+    }
+
 }

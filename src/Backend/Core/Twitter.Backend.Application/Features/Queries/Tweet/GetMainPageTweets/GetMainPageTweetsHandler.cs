@@ -11,13 +11,15 @@ public class
     private readonly ITweetRepository _tweetRepository;
     private readonly IUserRepository _userRepository;
     private readonly ITweetLikeRepository _tweetLikeRepository;
+    private ITweetHashTagRepository _hashTagRepository;
     
 
-    public GetMainPageTweetsHandler(ITweetRepository tweetRepository, ITweetLikeRepository tweetLikeRepository, IUserRepository userRepository)
+    public GetMainPageTweetsHandler(ITweetRepository tweetRepository, ITweetLikeRepository tweetLikeRepository, IUserRepository userRepository, ITweetHashTagRepository hashTagRepository)
     {
         _tweetRepository = tweetRepository;
         _tweetLikeRepository = tweetLikeRepository;
         _userRepository = userRepository;
+        _hashTagRepository = hashTagRepository;
     }
     
     // TODO: Implement the main page tweet functionality.
@@ -25,6 +27,7 @@ public class
     public async Task<PaginationResponse<GetMainPageTweetsResponse>> Handle(GetMainPageTweetsRequest request, CancellationToken cancellationToken)
     {
         var query = _tweetRepository.AsQueryable();
+        
 
         var list = query.Select(i => new GetMainPageTweetsResponse
         {
@@ -43,7 +46,8 @@ public class
             UserProfilePic = i.User.Profile.ImageUrl,
             LikeCount = i.TweetLikes.Count,
             RepliesCount = i.Replies.Count,
-            RetweetCount = i.Retweets.Count,    
+            RetweetCount = i.Retweets.Count,  
+            Hashtags = i.TweetHashtags.Select(i=>i.Hashtag.Tag).ToList()
         });
 
         return  list.GetPaged(request.PageSize, request.Page);

@@ -24,4 +24,6 @@ public class GetRepliesResponse
     public string UserUsername { get; set; }
     public string UserProfilePic { get; set; }
     public string UserDisplayName { get; set; }
+
+    public List<string> Hashtags { get; set; }
 }

@@ -62,7 +62,7 @@ else
     {
         var dvo = await _tweetService.GetTweetLikes(id);
 
-        var following = await _UserService.GetUserFollowings("");
+        //var following = await _UserService.GetUserFollowings("");
 
         foreach (var item in dvo.UserIds)
         {

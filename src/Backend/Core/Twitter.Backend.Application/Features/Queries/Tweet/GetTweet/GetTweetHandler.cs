@@ -9,52 +9,45 @@ public class GetTweetHandler : IRequestHandler<GetTweetRequest,GetTweetResponse>
     private readonly ITweetRepository _tweetRepository;
     private readonly IUserRepository _userRepository;
     private readonly ITweetLikeRepository _tweetLikeRepository;
+    private readonly ITweetHashTagRepository _hashtagRepository;
     private readonly IMapper _mapper;
 
-    public GetTweetHandler(ITweetRepository tweetRepository, IMapper mapper, IUserRepository userRepository, ITweetLikeRepository tweetLikeRepository)
+    public GetTweetHandler(ITweetRepository tweetRepository, IMapper mapper, IUserRepository userRepository, ITweetLikeRepository tweetLikeRepository, ITweetHashTagRepository hashtagRepository)
     {
         _tweetRepository = tweetRepository;
         _mapper = mapper;
         _userRepository = userRepository;
         _tweetLikeRepository = tweetLikeRepository;
+        _hashtagRepository = hashtagRepository;
     }
 
     public async Task<GetTweetResponse> Handle(GetTweetRequest request, CancellationToken cancellationToken)
     {
-        var tweet = await _tweetRepository.GetByIdAsync(request.Id);
-        var user = await _userRepository.GetByIdAsync(tweet.UserId,default,i=>i.Profile);
-        var likedByUsersCount = _tweetLikeRepository
-            .Get(i => i.TweetId == tweet.Id)
-            .Select(i => i.UserId)
-            .ToList()
-            .Count();
-        var repliesCount =  _tweetRepository
-            .Get(tweet => tweet.ParentTweetId == tweet.Id)
-            .ToList().Count;
+        var query = _tweetRepository.AsQueryable();
+        
 
-        return new GetTweetResponse()
+        var list = query.Where(i=>i.Id==request.Id).Select(i => new GetTweetResponse()
         {
-            CreatedDate = tweet.CreatedDate,
-            Id = tweet.Id,
-            Content = tweet.Content, 
-            MediaUrl = tweet.MediaUrl, 
-    
-            IsDeleted = tweet.IsDeleted,
-            DeletedDate = tweet.DeletedDate, 
-    
-            ParentTweetId = tweet.ParentTweetId, 
+            Id = i.Id,
+            Content = i.Content,
+            MediaUrl = i.MediaUrl,
+            CreatedDate = i.CreatedDate,
+            IsDeleted = i.IsDeleted,
+            DeletedDate = i.DeletedDate,
+            ParentTweetId = i.ParentTweetId,
+            UserId = i.UserId,
+            IsRetweet = i.IsRetweet,
+            RetweetParentId = i.RetweetParentId,
+            UserUsername = i.User.Username,
+            UserDisplayName = i.User.Profile.DisplayName,
+            UserProfilePic = i.User.Profile.ImageUrl,
+            LikeCount = i.TweetLikes.Count,
+            RepliesCount = i.Replies.Count,
+            RetweetCount = i.Retweets.Count,  
+            Hashtags = i.TweetHashtags.Select(i=>i.Hashtag.Tag).ToList()
+        });
 
-            UserId = tweet.UserId, 
-            IsRetweet = tweet.IsRetweet,
-            RetweetParentId = tweet.RetweetParentId, 
+        return list.FirstOrDefault();
 
-            RetweetCount = 0, // Todo: implement 
-            LikeCount = likedByUsersCount,
-            RepliesCount = repliesCount,
-
-            UserUsername = user.Username, 
-            UserProfilePic = user.Profile.ImageUrl , 
-            UserDisplayName = user.Profile.DisplayName, 
-        };
     }
 }

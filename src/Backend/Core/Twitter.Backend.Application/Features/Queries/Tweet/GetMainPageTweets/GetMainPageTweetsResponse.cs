@@ -25,4 +25,5 @@ public class GetMainPageTweetsResponse
     public string UserProfilePic { get; set; }
     public string UserDisplayName { get; set; }
 
+    public List<string> Hashtags { get; set; }
 }
