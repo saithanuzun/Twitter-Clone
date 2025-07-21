@@ -9,11 +9,11 @@ public class Tweet : BaseEntity
     public bool IsDeleted { get; set; }
     public DateTime DeletedDate { get; set; }
     
-    // Self-reference: Parent Tweet (if this is a reply)
+    // Self reference Parent Tweet 
     public Guid? ParentTweetId { get; set; }
     public Tweet? ParentTweet { get; set; }
 
-    // Self-reference: Replies to this tweet
+    // Self reference: Replies to this tweet
     public ICollection<Tweet>? Replies { get; set; }
     
     // Owner
