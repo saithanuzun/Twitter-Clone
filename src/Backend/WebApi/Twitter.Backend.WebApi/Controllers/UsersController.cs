@@ -14,9 +14,9 @@ using LoginRequest = Twitter.Backend.Application.Features.Commands.User.Login.Lo
 
 namespace Twitter.Backend.WebApi.Controllers;
 
-public class UserController : BaseController
+public class UsersController : BaseController
 {
-    public UserController(IMediator mediator) : base(mediator)
+    public UsersController(IMediator mediator) : base(mediator)
     {
     }
     
@@ -52,8 +52,8 @@ public class UserController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("{username}")]
-    public async Task<IActionResult> GetByUsername(string username)
+    [HttpGet]
+    public async Task<IActionResult> GetByUsername([FromQuery] string username)
     {
         var response = await _mediator.Send(new GetUserRequest() { Username = username });
         return Ok(response);
@@ -79,7 +79,7 @@ public class UserController : BaseController
         return Ok(response);
     }
     
-    [HttpGet("suggestions/{userId:guid}")]
+    [HttpGet("{userId:guid}/suggestions")]
     public async Task<IActionResult> GetUserFollowSuggestion(Guid userId)
     {
         var response = await _mediator.Send(new FollowSuggestionRequest(){UserId = userId});

@@ -14,9 +14,9 @@ using Twitter.Backend.Application.Features.Queries.User.GetUserTweets;
 
 namespace Twitter.Backend.WebApi.Controllers;
 
-public class TweetController : BaseController
+public class TweetsController : BaseController
 {
-    public TweetController(IMediator mediator) : base(mediator)
+    public TweetsController(IMediator mediator) : base(mediator)
     {
         
     }
@@ -41,6 +41,10 @@ public class TweetController : BaseController
     public async Task<IActionResult> GetById(Guid id)
     {
         var response = await _mediator.Send(new GetTweetRequest() { Id = id });
+        
+        if (response == null)
+            return NotFound();
+        
         return Ok(response);
     }
     
@@ -97,6 +101,26 @@ public class TweetController : BaseController
             PageSize = pageSize
         });
 
+        return Ok(response);
+    }
+    
+      
+    [HttpPost]
+    [Route("/api/tweets/{tweetId}/like")]
+    public async Task<IActionResult> CreateLike(Guid tweetId)
+    {
+        var request = new CreateLikeRequest() { TweetId = tweetId, UserId = UserId.Value };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+    
+    [HttpDelete]
+    [Route("/api/tweets/{tweetId}/like")]
+    public async Task<IActionResult> DeleteLike(Guid tweetId)
+    {
+        var request = new DeleteLikeRequest(){ TweetId = tweetId, UserId = UserId.Value};
+
+        var response = await _mediator.Send(request);
         return Ok(response);
     }
     

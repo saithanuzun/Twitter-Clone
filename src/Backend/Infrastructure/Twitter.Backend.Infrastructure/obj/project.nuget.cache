@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LxtNCsGSVPg=",
+  "dgSpecHash": "H70V1MLlVvI=",
   "success": true,
   "projectFilePath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Infrastructure/Twitter.Backend.Infrastructure/Twitter.Backend.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -60,7 +60,9 @@
     "/Users/saithanuzun/.nuget/packages/system.text.encoding.codepages/6.0.0/system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
-    "/Users/saithanuzun/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512"
+    "/Users/saithanuzun/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.netcore.app.ref/8.0.20/microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.20/microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512"
   ],
   "logs": []
 }

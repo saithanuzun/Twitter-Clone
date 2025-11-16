@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ui7c+c8oy+k=",
+  "dgSpecHash": "bZV/XQFpe2E=",
   "success": true,
   "projectFilePath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Core/Twitter.Backend.Application/Twitter.Backend.Application.csproj",
   "expectedPackageFiles": [
@@ -23,7 +23,9 @@
     "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/7.0.3/microsoft.identitymodel.protocols.openidconnect.7.0.3.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/microsoft.identitymodel.tokens/8.12.1/microsoft.identitymodel.tokens.8.12.1.nupkg.sha512",
     "/Users/saithanuzun/.nuget/packages/system.identitymodel.tokens.jwt/8.12.1/system.identitymodel.tokens.jwt.8.12.1.nupkg.sha512",
-    "/Users/saithanuzun/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "/Users/saithanuzun/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.netcore.app.ref/8.0.20/microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.20/microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512"
   ],
   "logs": []
 }

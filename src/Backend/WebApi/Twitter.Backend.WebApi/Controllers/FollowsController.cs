@@ -9,24 +9,24 @@ namespace Twitter.Backend.WebApi.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-public class FollowController : BaseController
+public class FollowsController : BaseController
 {
-    public FollowController(IMediator mediator) : base(mediator)
+    public FollowsController(IMediator mediator) : base(mediator)
     {
     }
     
-    [HttpPost("{beingFollowedId:guid}")]
-    public async Task<IActionResult> CreateFollow(Guid beingFollowedId)
+    [HttpPost("/users/{id}/follow")]
+    public async Task<IActionResult> CreateFollow(Guid id)
     {
-        var request = new CreateFollowRequest() { FollowerId = UserId.Value, FollowingId = beingFollowedId };
+        var request = new CreateFollowRequest() { FollowerId = UserId.Value, FollowingId = id };
         var response = await _mediator.Send(request);
         return Ok(response);
     }
     
-    [HttpDelete("{beingFollowedId:guid}")]
-    public async Task<IActionResult> DeleteFollow(Guid beingFollowedId)
+    [HttpDelete("/users/{id}/follow")]
+    public async Task<IActionResult> DeleteFollow(Guid id)
     {
-        var request = new DeleteFollowRequest() { FollowerId = UserId.Value, FollowingId = beingFollowedId };
+        var request = new DeleteFollowRequest() { FollowerId = UserId.Value, FollowingId = id };
         var response = await _mediator.Send(request);
         return Ok(response);
     }

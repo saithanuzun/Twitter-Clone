@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "pC2rLmVKMMQ=",
+  "dgSpecHash": "FB2ED1RmbCk=",
   "success": true,
   "projectFilePath": "/Users/saithanuzun/Desktop/git-Repositories/Twitter-Clone/src/Backend/Core/Twitter.Backend.Domain/Twitter.Backend.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/saithanuzun/.nuget/packages/microsoft.netcore.app.ref/8.0.20/microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
+    "/Users/saithanuzun/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.20/microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512"
+  ],
   "logs": []
 }
