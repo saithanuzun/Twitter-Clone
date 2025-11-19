@@ -9,7 +9,7 @@ public interface ITweetService
     Task<List<TweetDvo>> GetTweets();
     Task<TweetDvo> GetTweet(string tweetId);
     Task<PagedViewModel<TweetDvo>> GetMainPageTweets(int page, int pageSize);
-    Task<PagedViewModel<TweetDvo>> GetUserTweets(int page, int pageSize, string userName = null);
+    Task<UserTweetsDvo> GetUserTweets(int page, int pageSize, string userName = null);
     Task<List<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize);
     
     Task<TweetLikeDvo> GetTweetLikes(string tweetId);

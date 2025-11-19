@@ -19,7 +19,7 @@ public class HashtagService : IHashtagService
     {
         Console.WriteLine("Starting GetHashtags...");
 
-        var response = await _Client.GetAsync($"/api/hashtag/get-all");
+        var response = await _Client.GetAsync($"/api/hashtags");
         Console.WriteLine($"Response received. Status code: {response.StatusCode}");
 
         response.EnsureSuccessStatusCode();

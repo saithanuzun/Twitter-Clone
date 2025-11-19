@@ -15,7 +15,7 @@ public class UserService : IUserService
 
     public async Task<UserDetailsDvo> GetUserDetails(Guid? id)
     {
-        var response = await _client.GetAsync($"/api/user/{id}");
+        var response = await _client.GetAsync($"/api/users/{id}");
         
         var json = await response.Content.ReadAsStringAsync();
         
@@ -26,7 +26,7 @@ public class UserService : IUserService
 
     public async Task<UserDetailsDvo> GetUserDetails(string userName)
     {
-        var response = await _client.GetAsync($"/api/user/{userName}");
+        var response = await _client.GetAsync($"/api/users?username={userName}");
         
         var json = await response.Content.ReadAsStringAsync();
         
@@ -37,7 +37,7 @@ public class UserService : IUserService
 
     public async Task<UserFollowersDvo> GetUserFollowers(string userName)
     {
-        var response = await _client.GetAsync($"/api/user/{userName}/followers");
+        var response = await _client.GetAsync($"/api/users/{userName}/followers");
         
         var json = await response.Content.ReadAsStringAsync();
         
@@ -48,7 +48,7 @@ public class UserService : IUserService
 
     public async Task<UserFollowingDvo> GetUserFollowings(string userName)
     {
-        var response = await _client.GetAsync($"/api/user/{userName}/following");
+        var response = await _client.GetAsync($"/api/users/{userName}/following");
         
         var json = await response.Content.ReadAsStringAsync();
         
@@ -71,7 +71,7 @@ public class UserService : IUserService
     {
         Console.WriteLine("Starting GetHashtags...");
 
-        var response = await _client.GetAsync($"/api/user/suggestions/{UserId}");
+        var response = await _client.GetAsync($"/api/users/{UserId}/suggestions");
         Console.WriteLine($"Response received. Status code: {response.StatusCode}");
 
         response.EnsureSuccessStatusCode();

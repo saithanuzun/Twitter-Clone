@@ -52,33 +52,7 @@
 
 @code
 {
-    List<TweetViewModel> tweets = new List<TweetViewModel>
-    {
-        new TweetViewModel()
-        {
-            Username = "spacewatcher",
-            ProfileName = "Cosmic Observer",
-            Time = "25m",
-            Content = "NASA’s new telescope captures the clearest image yet of a distant exoplanet. Mind-blowing detail! 🪐✨ #Space #Astronomy",
-            ProfilePic = "https://randomuser.me/api/portraits/men/21.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1604079628043-9433b6b04b20", // Space image
-            RepliesCount = 18,
-            RetweetsCount = 55,
-            LikesCount = 240
-        },
-        new TweetViewModel()
-        {
-            Username = "fitwithjane",
-            ProfileName = "Jane’s Fitness Journey",
-            Time = "50m",
-            Content = "Just finished a 5K run and feeling amazing! Progress isn't always linear, but it's always worth it. 🏃‍♀️💪 #FitnessMotivation #RunLife",
-            ProfilePic = "https://randomuser.me/api/portraits/women/22.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1571019613914-85f342c1d4d2", // Running/fitness image
-            RepliesCount = 6,
-            RetweetsCount = 17,
-            LikesCount = 110
-        }
-    };
+    List<TweetViewModel> tweets = new List<TweetViewModel>();
 
 }
 
@@ -88,26 +62,62 @@
     
     [Inject]
     IUserService _UserService { get; set; }
+    
+    [Inject]
+    ITweetService _TweetService { get; set; }
+    
 
     private UserProfileViewModel UserProfile = new();
 
     protected override async Task OnParametersSetAsync()
     {
+        tweets.Clear();
+
         var user = await _UserService.GetUserDetails(username);
+        var userFollowers = await _UserService.GetUserFollowers(username);
+        var userFollowing = await _UserService.GetUserFollowings(username);
+        var dvo = await _TweetService.GetUserTweets(1, 10, userName: username);
+
+        var tweetIds = dvo.TweetIds;
         
-        UserProfile = new()
+        if (tweetIds is null)
+            tweetIds = new List<string>();
+
+        var tweetTasks = tweetIds.Select(async id =>
         {
-            FullName = user.FirstName + user.LastName,
+            var tweet = await _TweetService.GetTweet(id);
+            return new TweetViewModel
+            {
+                Id = tweet.Id,
+                Content = tweet.Content,
+                MediaUrl = tweet.MediaUrl,
+                LikesCount = tweet.LikeCount,
+                ProfileName = tweet.UserDisplayName,
+                ProfilePic = tweet.UserProfilePic,
+                RepliesCount = tweet.RepliesCount,
+                RetweetsCount = tweet.RetweetCount,
+                Time = tweet.CreatedDate.ToString("g"),
+                Username = tweet.UserUsername,
+                Hashtags = tweet.Hashtags,
+            };
+        });
+
+        var tweetModels = await Task.WhenAll(tweetTasks);
+        tweets.AddRange(tweetModels);
+
+        UserProfile = new UserProfileViewModel
+        {
+            FullName = $"{user.FirstName} {user.LastName}",
             Handle = user.Username,
             Bio = user.Bio,
             BannerImageUrl = user.ImageUrl,
             ProfileImageUrl = user.ImageUrl,
             Location = user.Location,
-            BirthDate = user.CreatedDate,
+            BirthDate = user.CreatedDate,          // use actual birth date if available
             JoinDate = user.CreatedDate,
-            FollowersCount = 12500,
-            FollowingCount = 789,
-            IsFollowing = false
+            FollowersCount = userFollowers.FollowersCount,
+            FollowingCount = userFollowing.followingsCount,
+            IsFollowing = false                  // or fetch from service
         };
 
         await base.OnParametersSetAsync();

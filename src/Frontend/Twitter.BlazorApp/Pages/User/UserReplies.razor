@@ -52,74 +52,8 @@
 
 @code
 {
-    List<TweetViewModel> tweets = new List<TweetViewModel>
-    {
-        new TweetViewModel()
-        {
-            Username = "techpulse_today",
-            ProfileName = "Tech Pulse",
-            Time = "10m",
-            Content = "AI-powered translation just took a leap forward with real-time context learning. The future of language is here. 🧠🌍 #AI #TechNews",
-            ProfilePic = "https://randomuser.me/api/portraits/men/10.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1581090700227-1e8e9023813d", // AI/tech related
-            RepliesCount = 19,
-            RetweetsCount = 43,
-            LikesCount = 178
-        },
-        new TweetViewModel()
-        {
-            Username = "plantparadise",
-            ProfileName = "Leaf & Bloom",
-            Time = "30m",
-            Content = "Can’t get enough of this Monstera growth! 🌿 Indoor plants really do lift the mood. #PlantLover #UrbanJungle",
-            ProfilePic = "https://randomuser.me/api/portraits/women/11.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1587300003388-59208cc962cb", // Plant photo
-            RepliesCount = 7,
-            RetweetsCount = 22,
-            LikesCount = 134
-        },
-        new TweetViewModel()
-        {
-            Username = "financetipsdaily",
-            ProfileName = "Money Matters",
-            Time = "1h",
-            Content = "5 ways to recession-proof your finances before the end of the year. 🧾💡 #FinanceTips #MoneyTalk",
-            ProfilePic = "https://randomuser.me/api/portraits/men/12.jpg",
-            MediaUrl = "", // Text-only finance tip
-            RepliesCount = 11,
-            RetweetsCount = 35,
-            LikesCount = 120
-        },
-        new TweetViewModel()
-        {
-            Username = "sketchbookmagic",
-            ProfileName = "Art by Lila",
-            Time = "2h",
-            Content = "Just finished this watercolour landscape. Something peaceful about painting with no music and just nature sounds. 🎨✨ #ArtistOnTwitter",
-            ProfilePic = "https://randomuser.me/api/portraits/women/13.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1529070538774-1843cb3265df", // Art sketch
-            RepliesCount = 20,
-            RetweetsCount = 52,
-            LikesCount = 245
-        },
-        new TweetViewModel()
-        {
-            Username = "mindfulminute",
-            ProfileName = "Mindful Minute",
-            Time = "5m",
-            Content = "Take a deep breath. Inhale calm, exhale stress. 🌬️ A gentle reminder to pause today. #Mindfulness #MentalHealth",
-            ProfilePic = "https://randomuser.me/api/portraits/men/14.jpg",
-            MediaUrl = "",
-            RepliesCount = 4,
-            RetweetsCount = 12,
-            LikesCount = 89
-        }
-    };
-
-
-}
-
-;
+    List<TweetViewModel> tweets = new List<TweetViewModel>();
+    
 
 }
 
@@ -130,26 +64,61 @@
 
     [Inject]
     IUserService _UserService { get; set; }
+    
+    [Inject]
+    ITweetService _TweetService { get; set; }
 
     private UserProfileViewModel UserProfile = new();
 
     protected override async Task OnParametersSetAsync()
     {
-        var user = await _UserService.GetUserDetails(username);
+        tweets.Clear();
 
-        UserProfile = new()
+        var user = await _UserService.GetUserDetails(username);
+        var userFollowers = await _UserService.GetUserFollowers(username);
+        var userFollowing = await _UserService.GetUserFollowings(username);
+        var dvo = await _TweetService.GetUserTweets(1, 10, userName: username);
+
+        var tweetIds = dvo.TweetIds;
+        
+        if (tweetIds is null)
+            tweetIds = new List<string>();
+
+        var tweetTasks = tweetIds.Select(async id =>
         {
-            FullName = user.FirstName + user.LastName,
+            var tweet = await _TweetService.GetTweet(id);
+            return new TweetViewModel
+            {
+                Id = tweet.Id,
+                Content = tweet.Content,
+                MediaUrl = tweet.MediaUrl,
+                LikesCount = tweet.LikeCount,
+                ProfileName = tweet.UserDisplayName,
+                ProfilePic = tweet.UserProfilePic,
+                RepliesCount = tweet.RepliesCount,
+                RetweetsCount = tweet.RetweetCount,
+                Time = tweet.CreatedDate.ToString("g"),
+                Username = tweet.UserUsername,
+                Hashtags = tweet.Hashtags,
+            };
+        });
+
+        var tweetModels = await Task.WhenAll(tweetTasks);
+        tweets.AddRange(tweetModels);
+
+        UserProfile = new UserProfileViewModel
+        {
+            FullName = $"{user.FirstName} {user.LastName}",
             Handle = user.Username,
             Bio = user.Bio,
             BannerImageUrl = user.ImageUrl,
             ProfileImageUrl = user.ImageUrl,
             Location = user.Location,
-            BirthDate = user.CreatedDate,
+            BirthDate = user.CreatedDate,          // use actual birth date if available
             JoinDate = user.CreatedDate,
-            FollowersCount = 12500,
-            FollowingCount = 789,
-            IsFollowing = false
+            FollowersCount = userFollowers.FollowersCount,
+            FollowingCount = userFollowing.followingsCount,
+            IsFollowing = false                  // or fetch from service
         };
 
         await base.OnParametersSetAsync();

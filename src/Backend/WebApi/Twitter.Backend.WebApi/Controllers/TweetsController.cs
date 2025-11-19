@@ -10,6 +10,8 @@ using Twitter.Backend.Application.Features.Queries.Tweet.GetMainPageTweets;
 using Twitter.Backend.Application.Features.Queries.Tweet.GetReplies;
 using Twitter.Backend.Application.Features.Queries.Tweet.GetTweet;
 using Twitter.Backend.Application.Features.Queries.Tweet.GetTweetLikes;
+using Twitter.Backend.Application.Features.Queries.User.GetUserLikes;
+using Twitter.Backend.Application.Features.Queries.User.GetUserReplies;
 using Twitter.Backend.Application.Features.Queries.User.GetUserTweets;
 
 namespace Twitter.Backend.WebApi.Controllers;
@@ -99,6 +101,30 @@ public class TweetsController : BaseController
             username = username,
             Page = page,
             PageSize = pageSize
+        });
+
+        return Ok(response);
+    }
+    
+    [HttpGet("/api/tweets/by-user/{username}/likes")]
+    public async Task<IActionResult> GetTweetsLikesByUsername(
+        [FromRoute] string username)
+    {
+        var response = await _mediator.Send(new GetUserLikesRequest
+        {
+            username = username,
+        });
+
+        return Ok(response);
+    }
+    
+    [HttpGet("/api/tweets/by-user/{username}/replies")]
+    public async Task<IActionResult> GetTweetsRepliesByUsername(
+        [FromRoute] string username)
+    {
+        var response = await _mediator.Send(new GetUserRepliesRequest
+        {
+            username = username,
         });
 
         return Ok(response);

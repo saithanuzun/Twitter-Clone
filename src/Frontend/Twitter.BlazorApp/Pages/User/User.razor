@@ -58,97 +58,67 @@
     
     [Inject]
     IUserService _UserService { get; set; }
+    
+    [Inject]
+    ITweetService _TweetService { get; set; }
 
     private UserProfileViewModel UserProfile = new();
 
     protected override async Task OnParametersSetAsync()
     {
+        tweets.Clear();
+
         var user = await _UserService.GetUserDetails(username);
         var userFollowers = await _UserService.GetUserFollowers(username);
         var userFollowing = await _UserService.GetUserFollowings(username);
+        var dvo = await _TweetService.GetUserTweets(1, 10, userName: username);
 
+        var tweetIds = dvo.TweetIds;
         
-        UserProfile = new()
+        if (tweetIds is null)
+            tweetIds = new List<string>();
+
+        var tweetTasks = tweetIds.Select(async id =>
         {
-            FullName = user.FirstName + user.LastName,
+            var tweet = await _TweetService.GetTweet(id);
+            return new TweetViewModel
+            {
+                Id = tweet.Id,
+                Content = tweet.Content,
+                MediaUrl = tweet.MediaUrl,
+                LikesCount = tweet.LikeCount,
+                ProfileName = tweet.UserDisplayName,
+                ProfilePic = tweet.UserProfilePic,
+                RepliesCount = tweet.RepliesCount,
+                RetweetsCount = tweet.RetweetCount,
+                Time = tweet.CreatedDate.ToString("g"),
+                Username = tweet.UserUsername,
+                Hashtags = tweet.Hashtags,
+            };
+        });
+
+        var tweetModels = await Task.WhenAll(tweetTasks);
+        tweets.AddRange(tweetModels);
+
+        UserProfile = new UserProfileViewModel
+        {
+            FullName = $"{user.FirstName} {user.LastName}",
             Handle = user.Username,
             Bio = user.Bio,
             BannerImageUrl = user.ImageUrl,
             ProfileImageUrl = user.ImageUrl,
             Location = user.Location,
-            BirthDate = user.CreatedDate,
+            BirthDate = user.CreatedDate,          // use actual birth date if available
             JoinDate = user.CreatedDate,
             FollowersCount = userFollowers.FollowersCount,
             FollowingCount = userFollowing.followingsCount,
-            IsFollowing = false
+            IsFollowing = false                  // or fetch from service
         };
 
         await base.OnParametersSetAsync();
     }
-    
-     List<TweetViewModel> tweets = new List<TweetViewModel>
-    {
-        new TweetViewModel()
-        {
-            Username = "globalnews_hub",
-            ProfileName = "Global News Hub",
-            Time = "1h",
-            Content = "Breaking: International summit concludes with agreements on climate action. Leaders optimistic about the future. #ClimateAction #GlobalSummit",
-            ProfilePic = "https://randomuser.me/api/portraits/men/4.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1517048676732-d65bc937f952", // Example image for news
-            RepliesCount = 25,
-            RetweetsCount = 78,
-            LikesCount = 310
-        },
-        new TweetViewModel()
-        {
-            Username = "foodieadventures",
-            ProfileName = "Culinary Explorer",
-            Time = "45m",
-            Content = "Just devoured the most amazing truffle pasta at 'The Gilded Spoon'! Highly recommend! 🍝 #foodie #pastalover",
-            ProfilePic = "https://randomuser.me/api/portraits/women/5.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1555939594-58d7adab639f", // Example food image
-            RepliesCount = 8,
-            RetweetsCount = 15,
-            LikesCount = 92
-        },
-        new TweetViewModel()
-        {
-            Username = "dev_insights",
-            ProfileName = "Code Whisperer",
-            Time = "2h",
-            Content = "Exploring the new features in C# 12. Pattern matching improvements are a game-changer! #csharp #programming",
-            ProfilePic = "https://randomuser.me/api/portraits/men/6.jpg",
-            MediaUrl = "", // No media for this tweet
-            RepliesCount = 12,
-            RetweetsCount = 30,
-            LikesCount = 150
-        },
-        new TweetViewModel()
-        {
-            Username = "travelbugsarah",
-            ProfileName = "Sarah's Journeys",
-            Time = "5h",
-            Content = "Sunrise over the Cliffs of Moher was breathtaking today! Ireland is truly magical. 🇮🇪 #travel #ireland",
-            ProfilePic = "https://randomuser.me/api/portraits/women/7.jpg",
-            MediaUrl = "https://images.unsplash.com/photo-1516026672288-bac67388709e", // Example travel image
-            RepliesCount = 15,
-            RetweetsCount = 40,
-            LikesCount = 200
-        },
-        new TweetViewModel()
-        {
-            Username = "dailyquotes",
-            ProfileName = "Inspiration Daily",
-            Time = "15m",
-            Content = "Believe you can and you're halfway there. - Theodore Roosevelt #motivation #inspiration",
-            ProfilePic = "https://randomuser.me/api/portraits/men/8.jpg",
-            MediaUrl = "",
-            RepliesCount = 3,
-            RetweetsCount = 10,
-            LikesCount = 75
-        }
-    };
+
+    List<TweetViewModel> tweets = new List<TweetViewModel>();
 
 }
 

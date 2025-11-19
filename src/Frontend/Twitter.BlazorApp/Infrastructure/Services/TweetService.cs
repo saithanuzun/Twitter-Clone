@@ -24,7 +24,7 @@ public class TweetService : ITweetService
 
     public async Task<TweetDvo> GetTweet(string tweetId)
     {
-        var response = await _client.GetAsync($"/api/tweet/{tweetId}");
+        var response = await _client.GetAsync($"/api/tweets/{tweetId}");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
@@ -38,7 +38,7 @@ public class TweetService : ITweetService
     {
         Console.WriteLine("Starting getmainpage...");
 
-        var response = await _client.GetAsync($"/api/tweet/feed?page={page}&pageSize={pageSize}");
+        var response = await _client.GetAsync($"/api/tweets/feed?page={page}&pageSize={pageSize}");
 
         response.EnsureSuccessStatusCode();
 
@@ -54,14 +54,25 @@ public class TweetService : ITweetService
         return dvo;
     }
 
-    public Task<PagedViewModel<TweetDvo>> GetUserTweets(int page, int pageSize, string userName = null)
+    public async Task<UserTweetsDvo> GetUserTweets(int page = 1, int pageSize= 10, string? userName = null)
     {
-        throw new NotImplementedException();
+        if (userName == null)
+            return null;
+                
+        var response = await _client.GetAsync($"/api/tweets/by-user/{userName}?page=1&pageSize=10");
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        var dvo = JsonSerializer.Deserialize<UserTweetsDvo>(json);
+
+        
+        
+        return dvo;
     }
 
     public async Task<List<TweetDvo>> GetTweetReplies(string tweetId, int page, int pageSize)
     {
-        var response = await _client.GetAsync($"/api/tweet/{tweetId}/replies");
+        var response = await _client.GetAsync($"/api/tweets/{tweetId}/replies");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
@@ -73,7 +84,7 @@ public class TweetService : ITweetService
 
     public async Task<TweetLikeDvo> GetTweetLikes(string tweetId)
     {
-        var response = await _client.GetAsync($"/api/tweet/{tweetId}/likes");
+        var response = await _client.GetAsync($"/api/tweets/{tweetId}/likes");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
@@ -85,7 +96,7 @@ public class TweetService : ITweetService
 
     public async Task<Guid> CreateTweet(CreateTweetDto command)
     {
-        var response = await _client.PostAsJsonAsync("api/tweet", command);
+        var response = await _client.PostAsJsonAsync("/api/tweets", command);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -99,7 +110,7 @@ public class TweetService : ITweetService
 
     public async Task<HashtagTweetDvo> GetHashtagTweets(string tag)
     {
-        var response = await _client.GetAsync($"/api/hashtag/{tag}");
+        var response = await _client.GetAsync($"/api/hashtags/by-tag/{tag}");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();

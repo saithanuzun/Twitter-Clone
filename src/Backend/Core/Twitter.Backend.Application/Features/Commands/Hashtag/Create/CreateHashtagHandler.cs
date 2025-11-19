@@ -6,8 +6,8 @@ namespace Twitter.Backend.Application.Features.Commands.Hashtag.Create;
 
 public class CreateHashtagHandler : IRequestHandler<CreateHashtagRequest,CreateHashtagResponse>
 {
-    private IHashtagRepository _hashtagRepository;
-    private IMapper _mapper;
+    private readonly IHashtagRepository _hashtagRepository;
+    private readonly IMapper _mapper;
 
     public CreateHashtagHandler(IHashtagRepository hashtagRepository, IMapper mapper)
     {

@@ -11,6 +11,12 @@ Twitter-Clone is a web application developed with .NET Core. On the client side,
 
 ![Homepage](screenshots/sc22.png)
 
+## 📸 Application
+
+<video src="screenshots/recording.mp4" controls></video>
+
+
+
 ## 📸 Application Screenshots
 
 ![Homepage](screenshots/sc8.png)
