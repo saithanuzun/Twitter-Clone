@@ -3,9 +3,7 @@
 Twitter-Clone is a web application developed with .NET Core. On the client side, Blazor WebAssembly is used along with Tailwind CSS, while the backend Web API is designed using the Onion architecture and the CQRS design pattern. The database is built using the Entity Framework Code First approach.## Database Diagram
 ![Database Diagram](https://github.com/user-attachments/assets/b0d9e5e6-42d4-4527-b2ae-fddbf93a2e4b)
 
-## 📸 Count Lines Of Code
 
-![Homepage](screenshots/sc1.png)
 
 ## 📸 Web API Endpoints
 

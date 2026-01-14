@@ -31,16 +31,21 @@ public class CreateTweetHandler : IRequestHandler<CreateTweetRequest, CreateTwee
 
 
         // Create tweet
-        var dbTweet = new Domain.Entities.Tweet()
+        // Create tweet
+        Domain.Entities.Tweet dbTweet;
+
+        if (request.IsRetweet == true && request.RetweetParentId.HasValue)
         {
-            Content = request.Content,
-            IsDeleted = false,
-            IsRetweet = request.IsRetweet ?? false,
-            UserId = request.UserId,
-            MediaUrl = request.MediaUrl,
-            RetweetParentId = request.RetweetParentId,
-            ParentTweetId = request.ParentTweetId,
-        };
+            dbTweet = Domain.Entities.Tweet.CreateRetweet(request.UserId, request.RetweetParentId.Value);
+        }
+        else if (request.ParentTweetId.HasValue)
+        {
+            dbTweet = Domain.Entities.Tweet.CreateReply(request.UserId, request.ParentTweetId.Value, request.Content, request.MediaUrl);
+        }
+        else
+        {
+            dbTweet = Domain.Entities.Tweet.Create(request.UserId, request.Content, request.MediaUrl);
+        }
 
         await _tweetRepository.AddAsync(dbTweet);
 
@@ -48,8 +53,8 @@ public class CreateTweetHandler : IRequestHandler<CreateTweetRequest, CreateTwee
         foreach (var tag in hashtags)
         {
             // Check if hashtag already exists
-            var existingHashtag = await _hashtagRepository.FirstOrDefaultAsync(i=>i.Tag==tag);
-            
+            var existingHashtag = await _hashtagRepository.FirstOrDefaultAsync(i => i.Tag == tag);
+
             Domain.Entities.Hashtag hashtagEntity;
 
             if (existingHashtag != null)

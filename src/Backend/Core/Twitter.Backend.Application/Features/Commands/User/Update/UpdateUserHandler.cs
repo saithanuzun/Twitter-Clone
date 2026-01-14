@@ -5,7 +5,7 @@ using Twitter.Backend.Domain.Repositories;
 
 namespace Twitter.Backend.Application.Features.Commands.User.Update;
 
-public class UpdateUserHandler : IRequestHandler<UpdateUserRequest,UpdateUserResponse>
+public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateUserResponse>
 {
     private IUserRepository _userRepository;
     private IMapper _mapper;
@@ -21,29 +21,21 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest,UpdateUserRes
         var dbUser = await _userRepository.GetByIdAsync(request.Id);
         if (dbUser is null)
             throw new Exception("user not found");
-        
-        Domain.Entities.User updatedUser = new Domain.Entities.User()
-        {
-            Id = dbUser.Id,
-            Username = request.Username,
-            Email = request.Email,
-            PasswordHash = request.Password,
-            Profile = new UserProfile()
-            {
-                Id = dbUser.Profile.Id,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                DisplayName = request.DisplayName,
-                Bio = request.Bio,
-                Location = request.Location,
-                ImageUrl = request.ImageUrl,
-            }
-        };
 
-        await _userRepository.UpdateAsync(updatedUser);
+        dbUser.UpdateUsername(request.Username);
+        dbUser.UpdateEmail(request.Email);
+        dbUser.UpdatePassword(request.Password);
+
+        if (dbUser.Profile != null)
+        {
+            dbUser.Profile.UpdateName(request.FirstName, request.LastName);
+            dbUser.Profile.UpdateInfo(request.DisplayName, request.Bio, request.Location, request.ImageUrl);
+        }
+
+        await _userRepository.UpdateAsync(dbUser);
 
         return new UpdateUserResponse() { GuidId = dbUser.Id };
 
     }
-    
+
 }

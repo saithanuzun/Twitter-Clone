@@ -6,7 +6,7 @@ using Twitter.Backend.Domain.Repositories;
 
 namespace Twitter.Backend.Application.Features.Commands.User.Create;
 
-public class CreateUserHandler : IRequestHandler<CreateUserRequest,CreateUserResponse>
+public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserResponse>
 {
     private IUserRepository _userRepository;
     private IMapper _mapper;
@@ -19,29 +19,20 @@ public class CreateUserHandler : IRequestHandler<CreateUserRequest,CreateUserRes
 
     public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
     {
-        
+
         var existUser = await _userRepository.GetSingleAsync(i => i.Email == request.Email);
 
         if (existUser is not null)
             throw new Exception("User Already Exist");
-        
+
         request.Password = PasswordEncryptor.Encrypt(request.Password);
 
-        Domain.Entities.User dbUser = new Domain.Entities.User()
-        {
-            Username = request.Username,
-            Email = request.Email,
-            PasswordHash = request.Password,
-            Profile = new UserProfile()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                DisplayName = request.DisplayName,
-                Bio = request.Bio,
-                Location = request.Location,
-                ImageUrl = request.ImageUrl,
-            }
-        };
+        var dbUser = new Domain.Entities.User(request.Username, request.Email, request.Password);
+
+        var profile = new UserProfile(dbUser.Id, request.FirstName, request.LastName);
+        profile.UpdateInfo(request.DisplayName, request.Bio, request.Location, request.ImageUrl);
+
+        dbUser.SetProfile(profile);
 
         await _userRepository.AddAsync(dbUser);
 
